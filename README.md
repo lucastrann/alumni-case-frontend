@@ -1,37 +1,27 @@
-# alumni-case-frontend
+# React + TypeScript + Vite
 
-[![standard-readme compliant](https://img.shields.io/badge/standard--readme-OK-green.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Last assigment connected to the Noroff Accelerate Course - Case period - Alumni task
+Currently, two official plugins are available:
 
-## Table of Contents
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-- [Install](#install)
-- [Usage](#usage)
-- [Maintainers](#maintainers)
-- [Contributing](#contributing)
-- [License](#license)
+## Expanding the ESLint configuration
 
-## Install
+If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
 
+- Configure the top-level `parserOptions` property like this:
+
+```js
+   parserOptions: {
+    ecmaVersion: 'latest',
+    sourceType: 'module',
+    project: ['./tsconfig.json', './tsconfig.node.json'],
+    tsconfigRootDir: __dirname,
+   },
 ```
-```
 
-## Usage
-
-```
-```
-
-## Maintainers
-
-[@lucastrann](https://github.com/lucastrann)
-
-## Contributing
-
-PRs accepted.
-
-Small note: If editing the README, please conform to the [standard-readme](https://github.com/RichardLitt/standard-readme) specification.
-
-## License
-
-MIT © 2023 lucas
+- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
+- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
+- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
