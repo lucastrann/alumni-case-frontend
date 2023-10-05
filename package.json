@@ -45,6 +45,7 @@
     ]
   },
   "devDependencies": {
-    "@types/keycloak-js": "^3.4.1"
+    "@types/keycloak-js": "^3.4.1",
+    "eslint-plugin-react-refresh": "^0.4.3"
   }
 }

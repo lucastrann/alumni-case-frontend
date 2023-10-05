@@ -11,8 +11,10 @@ function App() {
   return (
     <BrowserRouter>
       <Navbar />
-      <button onClick={KeycloakService.doLogout}>Logout</button>
-      <button onClick={KeycloakService.doLogin}>Login</button>
+      <h1>hello</h1>
+      <button onClick={KeycloakService.doLogout}>LOGOUT</button>
+      <button onClick={KeycloakService.doLogin}>LOGIN</button>
+      <h1>VELKOMMEN {KeycloakService.getUsername()}</h1>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/calendar" element={<Calendar />} />
