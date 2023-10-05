@@ -1,29 +1,34 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Navbar from './components/navbar/Navbar';
 import Calendar from './pages/Calendar';
 import Profile from './pages/Profile';
-import Login from './pages/Login';
 import Home from './pages/Home';
-import './App.css'
+import KeycloakRoute from './routes/KeycloakRoute';
+import { ROLES } from './const/roles';
+
 
 function App() {
-
+  
   return (
-    <>
-      <Router>
-      <Navbar />
-      <div>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/calendar" element={<Calendar />} />
-          <Route path="/login" element={<Login />} />
-          </Routes>
-      </div>
-    </Router>
-    </>
-  )
+    <BrowserRouter>
+    <Navbar />
+    <main className="container">
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/products" element={<Calendar />} />
+        <Route
+          path="/profile"
+          element={
+            <KeycloakRoute role={ROLES.User}>
+              <Profile />
+            </KeycloakRoute>
+          }
+        />
+      </Routes>
+    </main>
+  </BrowserRouter>
+);
 }
 
-export default App
+export default App;
