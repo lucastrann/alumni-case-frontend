@@ -4,31 +4,23 @@ import Navbar from './components/navbar/Navbar';
 import Calendar from './pages/Calendar';
 import Profile from './pages/Profile';
 import Home from './pages/Home';
-import KeycloakRoute from './routes/KeycloakRoute';
-import { ROLES } from './const/roles';
-
+import Login from './pages/Login';
+import KeycloakService from './services/KeycloakService';
 
 function App() {
-  
   return (
     <BrowserRouter>
-    <Navbar />
-    <main className="container">
+      <Navbar />
+      <button onClick={KeycloakService.doLogout}>Logout</button>
+      <button onClick={KeycloakService.doLogin}>Login</button>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/products" element={<Calendar />} />
-        <Route
-          path="/profile"
-          element={
-            <KeycloakRoute role={ROLES.User}>
-              <Profile />
-            </KeycloakRoute>
-          }
-        />
+        <Route path="/calendar" element={<Calendar />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
-    </main>
-  </BrowserRouter>
-);
+    </BrowserRouter>
+  );
 }
 
 export default App;
