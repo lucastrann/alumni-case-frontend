@@ -22,6 +22,7 @@ initialize()
   .catch(() => {
     root.render(
       <React.StrictMode>
+        <App />
         <p>Could Not Connect To Keycloak.</p>
       </React.StrictMode>
     );
