@@ -10,17 +10,21 @@ import KeycloakService from './services/KeycloakService';
 function App() {
   return (
     <BrowserRouter>
-      <Navbar />
       <h1>hello</h1>
-      <button onClick={KeycloakService.doLogout}>LOGOUT</button>
-      <button onClick={KeycloakService.doLogin}>LOGIN</button>
-      <h1>VELKOMMEN {KeycloakService.getUsername()}</h1>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/calendar" element={<Calendar />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/login" element={<Login />} />
-      </Routes>
+      {KeycloakService.isLoggedIn() ? (
+        <>
+          <Navbar />
+          <h1>VELKOMMEN {KeycloakService.getUsername()}</h1>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/calendar" element={<Calendar />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/login" element={<Login />} />
+          </Routes>
+        </>
+      ) : (
+        <Login /> // Render the Login component when not authenticated
+      )}
     </BrowserRouter>
   );
 }
