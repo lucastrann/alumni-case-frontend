@@ -1,4 +1,5 @@
 import React from "react";
+import "./Loading.css";
 
 interface LoadingProps {
   message: string;
@@ -6,9 +7,11 @@ interface LoadingProps {
 
 const Loading: React.FC<LoadingProps> = ({ message }) => {
   return (
-    <div className="loading">
+    <div className="loading-overlay">
+      <div className="loading-icon">
+        <i className="fa fa-spinner"></i>
+      </div>
       <p>{message}</p>
-      {/* You can add a loading spinner or animation here if needed */}
     </div>
   );
 };

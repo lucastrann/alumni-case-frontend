@@ -1,0 +1,16 @@
+
+
+.login-keycloak-btn {
+  background-color: #007bff; /* Set your desired button color */
+  color: white;
+  padding: 10px 20px;
+  font-size: 18px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.login-keycloak-btn:hover {
+  background-color: #0056b3; /* Set a darker color for hover effect */
+}
