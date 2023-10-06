@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import KeycloakService from '../services/KeycloakService';
+import KeycloakService from '../../services/KeycloakService';
+import './Login.css';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -12,11 +13,17 @@ const Login = () => {
     }
   }, [navigate]);
 
+  const handleLoginClick = () => {
+    KeycloakService.doLogin();
+  };
+
   return (
-    <>
-      <div>Login Page</div>
-      <button onClick={KeycloakService.doLogin}>LOGIN</button>
-    </>
+    <div className="container">
+      <h2 className="title">Welcome to our app</h2>
+      <button className="login-keycloak-btn" onClick={handleLoginClick}>
+        LOGIN
+      </button>
+    </div>
   );
 };
 

@@ -8,11 +8,10 @@ import KeycloakService from "./services/KeycloakService";
 const root = ReactDOM.createRoot(document.getElementById("root")!);
 
 // Display a loading screen when connecting to Keycloak
-root.render(<Loading message="Connecting to Keycloak..." />);
+root.render(<Loading message="Loading..." />);
 
 // Initialize Keycloak with a callback function
 KeycloakService.initKeycloak(() => {
-  // Render the actual application when Keycloak is initialized
   root.render(
     <React.StrictMode>
       <App />
