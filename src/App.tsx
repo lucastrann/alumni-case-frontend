@@ -14,7 +14,6 @@ function App() {
       {KeycloakService.isLoggedIn() ? (
         <>
           <Navbar />
-          <h1>VELKOMMEN {KeycloakService.getUsername()}</h1>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/calendar" element={<Calendar />} />
