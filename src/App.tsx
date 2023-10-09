@@ -10,7 +10,6 @@ import KeycloakService from './services/KeycloakService';
 function App() {
   return (
     <BrowserRouter>
-      {KeycloakService.isLoggedIn() ? (
         <>
           <Navbar />
           <Routes>
@@ -20,9 +19,6 @@ function App() {
             <Route path="/login" element={<Login />} />
           </Routes>
         </>
-      ) : (
-        <Login />
-      )}
     </BrowserRouter>
   );
 }
