@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import KeycloakService from '../../services/KeycloakService';
 import '../Pages.css'
-import { Button } from '@chakra-ui/react'
+import { Button, Box, Text } from '@chakra-ui/react'
 
 const Profile = () => {
   const [hasRole, setRole] = useState(false);
@@ -14,13 +14,13 @@ const Profile = () => {
 
   return (
     <>
-      <div className='container'>
-      <div className='title'>Your Profile</div>
+      <Box className='container'>
+      <Text className='title'>Your Profile</Text>
       <h1>{KeycloakService.getUsername()}</h1>
       <Button colorScheme='blue' onClick={KeycloakService.doLogout}>
               Post
             </Button>
-      </div>
+      </Box>
     </>
   );
 };

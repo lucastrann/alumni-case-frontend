@@ -6,16 +6,25 @@ import Profile from './pages/profile/Profile';
 import Home from './pages/home/Home';
 import Login from './pages/login/Login';
 import KeycloakService from './services/KeycloakService';
-import { ChakraProvider } from '@chakra-ui/react'
+import { ChakraProvider, CSSReset  } from '@chakra-ui/react'
+import theme from './components/chakraUI/chakra-theme';
 
 function App() {
   return (
-    <ChakraProvider>
+    <ChakraProvider theme={theme}>
+      <CSSReset/>
     <BrowserRouter>
         <>
           <Navbar />
+          <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/calendar" element={<Calendar />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/login" element={<Login />} />
+      </Routes>
         </>
-      </BrowserRouter>
+        </BrowserRouter>
+
       </ChakraProvider>
   );
 }
