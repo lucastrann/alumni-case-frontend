@@ -8,20 +8,25 @@ import Login from './pages/login/Login';
 import KeycloakService from './services/KeycloakService';
 import { ChakraProvider, CSSReset  } from '@chakra-ui/react'
 import theme from './components/chakraUI/chakra-theme';
+import withKeycloak from './hoc/withKeycloak';
+
+const AuthenticatedCalendar = withKeycloak(Calendar);
+const AuthenticatedProfile = withKeycloak(Profile);
+
 
 function App() {
   return (
     <ChakraProvider theme={theme}>
-      <CSSReset/>
-    <BrowserRouter>
+      <CSSReset />
+      <BrowserRouter>
         <>
           <Navbar />
           <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/calendar" element={<Calendar />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route path="/calendar" element={<AuthenticatedCalendar />} />
+        <Route path="/profile" element={<AuthenticatedProfile />} />
         <Route path="/login" element={<Login />} />
-      </Routes>
+            </Routes>
         </>
         </BrowserRouter>
 
