@@ -12,14 +12,16 @@ const Profile = () => {
 
   return (
     <>
-      <h1>VELKOMMEN {KeycloakService.getFirstName()}</h1>
+      <div className='container'>
+        <h1 className='title'>VELKOMMEN {KeycloakService.getFirstName()}</h1>
       {hasRole ? (
         <p>User has the 'User' role</p>
       ) : (
         <p>User does not have the 'admin' role</p>
       )}
       <div>Profile Page</div>
-      <button onClick={KeycloakService.doLogout}>LOGOUT</button>
+        <button onClick={KeycloakService.doLogout}>LOGOUT</button>
+        </div>
     </>
   );
 };

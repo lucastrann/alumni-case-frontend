@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import KeycloakService from '../../services/KeycloakService';
 import '../Pages.css'
+import { Button } from '@chakra-ui/react'
 
 const Profile = () => {
   const [hasRole, setRole] = useState(false);
@@ -16,10 +17,9 @@ const Profile = () => {
       <div className='container'>
       <div className='title'>Your Profile</div>
       <h1>{KeycloakService.getUsername()}</h1>
-        <button onClick={KeycloakService.doLogout}>LOGOUT</button>
-        {hasRole ? (
-          <p>has role</p>
-        ) : (<p>no role</p>)}
+      <Button colorScheme='blue' onClick={KeycloakService.doLogout}>
+              Post
+            </Button>
       </div>
     </>
   );
