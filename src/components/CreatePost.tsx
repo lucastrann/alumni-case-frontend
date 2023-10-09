@@ -1,52 +1,26 @@
-// PostCreate.js
 import React, { useState } from 'react';
-import {
-  Button,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
-  Input,
-  useDisclosure,
-} from '@chakra-ui/react';
+import { Button, useDisclosure } from '@chakra-ui/react';
+import ModalComponent from './modal/ModalComponent';
 
 const CreatePost = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [postText, setPostText] = useState('');
 
-  const handlePost = () => {
+  const handlePost = (postText: string) => { // Add explicit type 'string'
     console.log(`HER ER INNLEGGET DITT: ${postText}`);
-    setPostText('');
-    onClose();
   };
 
   return (
     <>
-      <Button colorScheme='teal' onClick={onOpen}>
+      <Button colorScheme="teal" onClick={onOpen}>
         Create Post
       </Button>
-      <Modal isOpen={isOpen} onClose={onClose}>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>What's on your mind?</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>
-            <Input
-              placeholder='HVA SKAL DU SKRIVE?'
-              value={postText}
-              onChange={(e) => setPostText(e.target.value)}
-            />
-          </ModalBody>
-          <ModalFooter>
-            <Button colorScheme='blue' onClick={handlePost}>
-              Post
-            </Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
+      <ModalComponent
+        isOpen={isOpen}
+        onClose={onClose}
+        onConfirm={handlePost}
+        title="What's on your mind?"
+        placeholder="HVA SKAL DU SKRIVE?"
+      />
     </>
   );
 };
