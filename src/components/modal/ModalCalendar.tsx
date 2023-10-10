@@ -12,6 +12,7 @@ import {
 } from "@chakra-ui/react";
 import DatePicker from "react-datepicker"; // Import DatePicker
 import "react-datepicker/dist/react-datepicker.css"; // Import DatePicker styles
+import '../css/Calendar.css';
 
 interface ModalCalendarProps {
   isOpen: boolean;
@@ -57,21 +58,24 @@ const ModalCalendar: React.FC<ModalCalendarProps> = ({
             value={eventTitle}
             onChange={(e) => setEventTitle(e.target.value)}
             mb="2"
+            className="custom-input"
           />
-          <DatePicker
-            selected={startDate}
-            onChange={(date: Date | null) => setStartDate(date)}
-            dateFormat="dd/MM/yyyy" // Set the desired date format
-            placeholderText="Start Date"
-            className="date-picker" 
-          />
-          <DatePicker
-            selected={endDate}
-            onChange={(date: Date | null) => setEndDate(date)}
-            dateFormat="dd/MM/yyyy" // Set the desired date format
-            placeholderText="End Date"
-            className="date-picker" 
-          />
+         <div className="date-picker-container">
+            <DatePicker
+              selected={startDate}
+              onChange={(date: Date | null) => setStartDate(date)}
+              dateFormat="dd/MM/yyyy"
+              placeholderText="Start Date"
+              className="custom-date-picker" // Add a custom class for date picker styling
+            />
+            <DatePicker
+              selected={endDate}
+              onChange={(date: Date | null) => setEndDate(date)}
+              dateFormat="dd/MM/yyyy"
+              placeholderText="End Date"
+              className="custom-date-picker" // Add a custom class for date picker styling
+            />
+          </div>
           <Flex justifyContent="flex-end">
             <Button colorScheme="teal" onClick={handleConfirmClick}>
               Confirm

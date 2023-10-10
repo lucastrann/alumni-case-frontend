@@ -1,0 +1,21 @@
+/* Custom CSS for styling the input field */
+.custom-input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  margin-bottom: 16px;
+}
+
+/* Custom CSS for styling the date picker */
+.custom-date-picker {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  margin-bottom: 16px;
+}
+
+/* Add additional styles as needed */
