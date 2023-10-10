@@ -2,7 +2,6 @@
 
 /* Style for the top navbar */
 .navbar {
-  background-color: #333;
   overflow: hidden;
   width: 100%;
   position: fixed;
@@ -29,8 +28,9 @@
   color: rgb(255, 255, 255);
   text-align: center;
   text-decoration: none;
-  padding: 10px 20px; /* Adjust the link spacing */
+  padding: 15px 20px; /* Increase the padding to make the links bigger */
   transition: background-color 0.3s;
+  font-size: 20px; /* Increase the font size to make the text bigger */
 }
 
 /* Style for the links on hover */
@@ -46,7 +46,7 @@
     height: auto;
   }
   .navbar a {
-    padding: 10px; /* Reduce padding for smaller screens */
+    padding: 15px; /* Reduce padding for smaller screens */
     width: 100%; /* Full width for links on smaller screens */
   }
 }
