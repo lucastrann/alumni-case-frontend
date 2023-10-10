@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
@@ -10,11 +10,10 @@ const root = ReactDOM.createRoot(document.getElementById("root")!);
 // Display a loading screen when connecting to Keycloak
 root.render(<Loading message="Loading..." />);
 
-// Initialize Keycloak with a callback function
-KeycloakService.initKeycloak(() => {
+//KeycloakService.initKeycloak(() => {
   root.render(
     <React.StrictMode>
       <App />
     </React.StrictMode>
   );
-});
+//});

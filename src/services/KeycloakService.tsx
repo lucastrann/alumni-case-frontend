@@ -58,6 +58,8 @@ const updateToken = (successCallback: () => void): void => {
  */
 const getUsername = (): string | undefined => _keycloak.tokenParsed?.preferred_username;
 
+const getFirstName = (): string | undefined => _keycloak.tokenParsed?.preferred_firstname;
+
 /**
  * Check if the user has any of the given roles
  * @param {Array<string>} roles
@@ -65,7 +67,9 @@ const getUsername = (): string | undefined => _keycloak.tokenParsed?.preferred_u
  */
 const hasRole = (roles: string[]): boolean => roles.some((role) => _keycloak.hasRealmRole(role));
 
+
 const KeycloakService = {
+  getFirstName,
   initKeycloak,
   doLogin,
   doLogout,
