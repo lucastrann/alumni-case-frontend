@@ -14,7 +14,7 @@ import {
 interface ModalComponentProps {
   isOpen: boolean;
   onClose: () => void;
-  onConfirm: (text: string) => void; // Add explicit type 'string'
+  onConfirm: (text: string) => void; 
   title: string;
   placeholder: string;
 }

@@ -28,13 +28,25 @@ const CalendarComp = () => {
     onClose(); // Close the modal after adding the new event
   };
 
-  // Handle confirming the modal and extracting the event title
   const handleConfirm = (eventTitle: string) => {
+    const dateString = '15/10/2023'; // Assuming DD/MM/YYYY format
+
+
+    const parts = dateString.split('/');
+    const day = parseInt(parts[0], 10);
+    const month = parseInt(parts[1], 10) - 1; // Months in JavaScript are zero-based (0-11)
+    const year = parseInt(parts[2], 10);
+    
+
+    const start = new Date(year, month, day, 0, 0, 0); 
+    const end = new Date(year, month, day, 23, 59, 59);
+
     const newEvent: Event = {
       title: eventTitle,
-      start: new Date('12-10-2023'), // You can set the start date as needed
-      end: new Date('14-10-2023'),   // You can set the end date as needed
+      start: new Date(start), // You can set the start date as needed
+      end: new Date(end),   // You can set the end date as needed
     };
+    console.log(newEvent)
     handleNewEvent(newEvent);
   };
 

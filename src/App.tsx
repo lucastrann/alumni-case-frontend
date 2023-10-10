@@ -23,8 +23,8 @@ function App() {
           <Navbar />
           <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/calendar" element={<AuthenticatedCalendar />} />
-        <Route path="/profile" element={<AuthenticatedProfile />} />
+        <Route path="/calendar" element={<Calendar />} />
+        <Route path="/profile" element={<Profile />} />
         <Route path="/login" element={<Login />} />
             </Routes>
         </>
