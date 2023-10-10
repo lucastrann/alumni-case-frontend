@@ -15,11 +15,17 @@ const Profile = () => {
   return (
     <>
       <Box className='container'>
-      <Text className='title'>Your Profile</Text>
-      <h1>{KeycloakService.getUsername()}</h1>
+        {KeycloakService.isLoggedIn() ? (
+          <>
+          <Text className='title'>Your Profile</Text>
+        <h1>{KeycloakService.getUsername()}</h1>
       <Button colorScheme='blue' onClick={KeycloakService.doLogout}>
-              Post
+              Logout
             </Button>
+          </>
+        ) : (
+            <p> not logged in </p>
+            )}
       </Box>
     </>
   );
