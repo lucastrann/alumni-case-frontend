@@ -1,20 +1,18 @@
 import React from 'react';
-import '../Pages.css'
-import CreatePost from '../../components/CreatePost';
+import '../../components/css/Pages.css'
+import CreatePost from '../../components/home/CreatePost';
 import { Box, Text } from '@chakra-ui/react';
 import KeycloakService from '../../services/KeycloakService';
+import { userData } from '../../components/home/data';
+import Feed from '../../components/home/Feed';
 
 const Home = () => {
   return (
     <>
-      <Box className='container'>
+      <Box className='home-container'>
         <Text className='title'>Homepage</Text>
-        {KeycloakService.isLoggedIn() ? (
-          <CreatePost />
-        ) : ( 
-            <p>Login to post 
-            </p>
-        )}
+        <CreatePost />
+        <Feed data={userData} />
       </Box>
     </>
   );

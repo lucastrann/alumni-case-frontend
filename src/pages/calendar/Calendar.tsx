@@ -1,5 +1,5 @@
 import React from 'react';
-import '../Pages.css'
+import '../../components/css/Pages.css'
 import CalendarComp from '../../components/CalendarComp';
 import {Box, Text } from '@chakra-ui/react'
 
