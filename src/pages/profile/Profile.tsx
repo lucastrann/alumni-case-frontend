@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import KeycloakService from '../../services/KeycloakService';
-import '../Pages.css'
+import '../../components/css/Pages.css'
 import { Button, Box, Text } from '@chakra-ui/react'
 
 const Profile = () => {
