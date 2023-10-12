@@ -10,10 +10,10 @@ const root = ReactDOM.createRoot(document.getElementById("root")!);
 // Display a loading screen when connecting to Keycloak
 root.render(<Loading message="Loading..." />);
 
-//KeycloakService.initKeycloak(() => {
+KeycloakService.initKeycloak(() => {
   root.render(
     <React.StrictMode>
       <App />
     </React.StrictMode>
   );
-//});
+});

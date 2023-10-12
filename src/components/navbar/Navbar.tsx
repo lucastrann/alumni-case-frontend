@@ -11,6 +11,7 @@ import {
   useColorMode,
 } from '@chakra-ui/react';
 import { MoonIcon, SunIcon } from '@chakra-ui/icons';
+import KeycloakService from '../../services/KeycloakService';
 
 const Navbar: React.FC = () => {
   const { colorMode, toggleColorMode } = useColorMode();
@@ -36,7 +37,7 @@ const Navbar: React.FC = () => {
           Alumni
         </Heading>
         <Spacer />
-        <Flex alignItems="center">
+        <Flex alignItems="center" justifyContent="center" >
           <Link
             as={RouterLink}
             to="/"
@@ -86,6 +87,24 @@ const Navbar: React.FC = () => {
         >
           {colorMode === 'dark' ? 'Light Mode' : 'Dark Mode'}
         </Button>
+        {!KeycloakService.isLoggedIn() && (
+          <Button
+            variant="outline"
+            borderColor={colorMode === 'dark' ? 'teal.300' : 'teal.600'}
+          color={colorMode === 'dark' ? 'white' : 'gray.800'}
+    _hover={{
+      bg: colorMode === 'dark' ? 'teal.300' : 'teal.600',
+      color: 'white',
+            }}
+            ml={2}
+            mr={2}
+    onClick={KeycloakService.doLogin}
+  >
+    Login
+  </Button>
+)}
+
+        
         <IconButton
           aria-label="Toggle Dark Mode"
           icon={colorMode === 'dark' ? <SunIcon /> : <MoonIcon />}
