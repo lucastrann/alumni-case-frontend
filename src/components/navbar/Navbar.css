@@ -6,6 +6,9 @@
   width: 100%;
   position: fixed;
   top: 0;
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
 }
 
 /* Style for the navigation links */
@@ -14,9 +17,6 @@
   margin: 0;
   padding: 0;
   display: flex;
-  justify-content: space-around; /* Spread the links evenly */
-  align-items: center; /* Vertically center the links */
-  height: 60px; /* Adjust the navbar height */
 }
 
 .navbar li {
@@ -28,9 +28,9 @@
   color: rgb(255, 255, 255);
   text-align: center;
   text-decoration: none;
-  padding: 15px 20px; /* Increase the padding to make the links bigger */
+  padding: 15px 20px;
   transition: background-color 0.3s;
-  font-size: 20px; /* Increase the font size to make the text bigger */
+  font-size: 20px;
 }
 
 /* Style for the links on hover */
@@ -42,11 +42,11 @@
 /* Media query for responsive design */
 @media screen and (max-width: 768px) {
   .navbar ul {
-    flex-direction: column; /* Stack links vertically on smaller screens */
+    flex-direction: column;
     height: auto;
   }
   .navbar a {
-    padding: 15px; /* Reduce padding for smaller screens */
-    width: 100%; /* Full width for links on smaller screens */
+    padding: 15px;
+    width: 100%;
   }
 }

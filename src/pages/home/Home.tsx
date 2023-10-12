@@ -11,8 +11,12 @@ const Home = () => {
     <>
       <Box className='home-container'>
         <Text className='title'>Homepage</Text>
-        <CreatePost />
-        <Feed data={userData} />
+        {KeycloakService.isLoggedIn() ? (
+                 <CreatePost />
+        ) : (
+            <p>You have to login to post</p>
+        )}
+          <Feed data={userData} />
       </Box>
     </>
   );
