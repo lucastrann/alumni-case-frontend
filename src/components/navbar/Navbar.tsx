@@ -29,8 +29,11 @@ const Navbar: React.FC = () => {
           <Link as={RouterLink} to="/calendar" color="white" mr={20}>
             Calendar
           </Link>
-          <Link as={RouterLink} to="/profile" color="white">
+          <Link as={RouterLink} to="/profile" color="white" mr={20}>
             Profile
+          </Link>
+          <Link as={RouterLink} to="/gruppe" color="white">
+            Gruppe
           </Link>
         </Flex>
         <Spacer />

@@ -9,6 +9,7 @@ import KeycloakService from './services/KeycloakService';
 import { ChakraProvider, CSSReset  } from '@chakra-ui/react'
 import theme from './components/chakraUI/chakra-theme';
 import withKeycloak from './hoc/withKeycloak';
+import Gruppe from "./pages/gruppe/Gruppe";
 
 const AuthenticatedCalendar = withKeycloak(Calendar);
 const AuthenticatedProfile = withKeycloak(Profile);
@@ -26,6 +27,7 @@ function App() {
         <Route path="/calendar" element={<Calendar />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/login" element={<Login />} />
+              <Route path="/gruppe" element={<Gruppe />} />
             </Routes>
         </>
         </BrowserRouter>
