@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Box, Text, Avatar, Button, Input } from '@chakra-ui/react';
 import { Post, userData } from './data';
 import '../css/Feed.css';
+import KeycloakService from '../../services/KeycloakService';
 
 interface PostProps {
   post: Post;
@@ -13,17 +14,24 @@ const PostComponent: React.FC<PostProps> = ({ post }) => {
   const [newComment, setNewComment] = useState('');
 
   const handleAddComment = () => {
-    if (newComment.trim() !== '') {
-      // Add a new comment to the post's comments array
+    if (KeycloakService.isLoggedIn()) {
+      if (newComment.trim() !== '') {
+      console.log(KeycloakService.getUsername())
+      const author = KeycloakService.getUsername() || 'Guest'; // Provide a default author
       post.comments.push({
         id: post.comments.length + 1,
-        author: userData.user.name,
+        author: author,
         text: newComment,
         timestamp: new Date().toUTCString(),
       });
       setNewComment('');
     }
+    } else {
+      alert("login to comment")
+    }
+    
   };
+  
 
   return (
     <Box className="post">
