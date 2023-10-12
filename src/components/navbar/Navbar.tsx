@@ -91,7 +91,7 @@ const Navbar: React.FC = () => {
           <Button
             variant="outline"
             borderColor={colorMode === 'dark' ? 'teal.300' : 'teal.600'}
-          color={colorMode === 'dark' ? 'white' : 'gray.800'}
+          color={colorMode === 'dark' ? 'gray' : 'gray.800'}
     _hover={{
       bg: colorMode === 'dark' ? 'teal.300' : 'teal.600',
       color: 'white',
