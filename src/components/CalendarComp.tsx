@@ -49,6 +49,20 @@ const CalendarComp = () => {
     handleNewEvent(newEvent);
   };
 
+  const dateHighlighter = (event: Event, start: Date, end: Date, isSelected: boolean) => {
+    const isCurrentDate = moment(start).isSame(new Date(), 'day');
+
+    if (isCurrentDate) {
+      return {
+        style: {
+          backgroundColor: 'rgba(241, 239, 145, 0.5)', // You can adjust the color here
+        },
+      };
+    }
+
+    return {};
+  };
+
   return (
     <Center>
       <Box maxW="800px" p="4">
@@ -66,6 +80,8 @@ const CalendarComp = () => {
           style={{ height: 600 }}
           getNow={() => new Date()} 
 >>>>>>> Stashed changes
+          getNow={() => new Date()} 
+          eventPropGetter={dateHighlighter}
         />
         <ModalCalendar
           isOpen={isOpen}

@@ -75,7 +75,7 @@ const Navbar: React.FC = () => {
           </Link>
         </Flex>
         <Spacer />
-        <Button
+{/*         <Button
           variant="outline"
           borderColor={colorMode === 'dark' ? 'teal.300' : 'teal.600'}
           color={colorMode === 'dark' ? 'white' : 'gray.800'}
@@ -86,7 +86,7 @@ const Navbar: React.FC = () => {
           onClick={toggleColorMode}
         >
           {colorMode === 'dark' ? 'Light Mode' : 'Dark Mode'}
-        </Button>
+        </Button> */}
         {!KeycloakService.isLoggedIn() && (
           <Button
             variant="outline"

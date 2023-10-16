@@ -2,30 +2,25 @@ import React, { useState } from 'react';
 import { Button, useDisclosure } from '@chakra-ui/react';
 import ModalComponent from '../modal/ModalComponent';
 import { userData } from './data';
+import KeycloakService from '../../services/KeycloakService';
 
 const CreatePost = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [newPostText, setNewPostText] = useState('');
 
-  const generateRandomName = () => {
-    const names = ['Alice', 'Bob', 'Charlie', 'David', 'Eve', 'Frank'];
-    const randomIndex = Math.floor(Math.random() * names.length);
-    return names[randomIndex];
-  };
+  const author = KeycloakService.getUsername()
 
   const handlePost = (postText: string) => {
-    const randomAuthorName = generateRandomName();
     const newPost = {
       id: userData.posts.length + 1,
-      author: randomAuthorName,
+      author: author,
       text: postText,
       timestamp: new Date().toUTCString(),
       comments: [] // Initialize comments as an empty array
     };
 
-    userData.posts = [newPost, ...userData.posts];
+    console.log(newPost);
 
-    console.log(`New Post by ${randomAuthorName}: ${postText}`);
+    userData.posts = [newPost, ...userData.posts];
 
     onClose();
   };
