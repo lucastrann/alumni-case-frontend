@@ -4,7 +4,7 @@ import ApiService from '../../services/ApiService'; // Import the ApiService
 import '../../components/css/Pages.css';
 import { Button, Box, Text, Image, Flex } from '@chakra-ui/react';
 
-const apiService = new ApiService('http://localhost:8080'); // Replace with your API base URL
+const apiService = new ApiService('http://localhost:8080/api/v1/'); // Replace with your API base URL
 
 const Profile = () => {
   const [hasRole, setRole] = useState(false);
@@ -41,12 +41,13 @@ const Profile = () => {
               borderRadius="full" // Apply circular border-radius
               boxShadow="lg" // Add a shadow for a modern look
             />
-            <Box ml="4"> {/* Add some spacing */}
-              <h1>{KeycloakService.getName()}</h1>
-              <h2>{userData?.status}</h2>
-              <p>{userData?.bio}</p>
-              <h3>{userData?.funFact}</h3>
-            </Box>
+<Box ml={10}>
+  <Text fontSize="3xl" fontWeight="bold">{KeycloakService.getName()}</Text>
+  <Text fontSize="xl" color="gray.500">{userData?.status}</Text>
+  <Text fontSize="lg" color="gray.600">{userData?.bio}</Text>
+  <Text fontSize="lg" fontStyle="italic" mt={2}>{userData?.funFact}</Text>
+</Box>
+
           </Flex>
           <Button colorScheme='blue' onClick={KeycloakService.doLogout}>
             Logout

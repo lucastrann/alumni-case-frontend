@@ -8,7 +8,7 @@ class ApiService {
 
   async fetchUserData() {
     try {
-      const response = await fetch(`http://localhost:8080/api/v1/user/9e8ae4c6-7901-4ce3-b562-395fc411e006`);
+      const response = await fetch(`${this.baseUrl}user/9e8ae4c6-7901-4ce3-b562-395fc411e006`);
       if (response.ok) {
         const data = await response.json();
         return data;
@@ -18,6 +18,17 @@ class ApiService {
     } catch (error) {
       throw new Error(`Error fetching user data: ${error}`);
     }
+  }
+
+  async getAllGroups() {
+    const url = `${this.baseUrl}group`;
+    const response = await fetch(url);
+  
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+  
+    return response.json();
   }
 
 
