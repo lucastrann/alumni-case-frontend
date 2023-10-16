@@ -55,7 +55,7 @@ const CalendarComp = () => {
     if (isCurrentDate) {
       return {
         style: {
-          backgroundColor: 'rgba(241, 239, 145, 0.5)', // You can adjust the color here
+          backgroundColor: 'rgba(241, 239, 145, 0.5)',
         },
       };
     }
@@ -74,14 +74,8 @@ const CalendarComp = () => {
           events={events}
           startAccessor={(event) => event.start}
           endAccessor={(event) => event.end}
-<<<<<<< Updated upstream
-          style={{ height: 500 }}
-=======
           style={{ height: 600 }}
           getNow={() => new Date()} 
->>>>>>> Stashed changes
-          getNow={() => new Date()} 
-          eventPropGetter={dateHighlighter}
         />
         <ModalCalendar
           isOpen={isOpen}
