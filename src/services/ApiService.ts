@@ -1,5 +1,4 @@
-import axios, { AxiosResponse, AxiosError } from 'axios';
-
+// ApiService.ts
 class ApiService {
   private baseUrl: string;
 
@@ -7,52 +6,91 @@ class ApiService {
     this.baseUrl = baseUrl;
   }
 
-  async get<T>(endpoint: string): Promise<T> {
+  async fetchUserData() {
     try {
-      const response: AxiosResponse<T> = await axios.get(`${this.baseUrl}/${endpoint}`);
-      return response.data;
+      const response = await fetch(`${this.baseUrl}user/9e8ae4c6-7901-4ce3-b562-395fc411e006`);
+      if (response.ok) {
+        const data = await response.json();
+        return data;
+      } else {
+        throw new Error('Failed to fetch user data');
+      }
     } catch (error) {
-      throw this.handleApiError(error);
+      throw new Error(`Error fetching user data: ${error}`);
     }
   }
 
-  async post<T>(endpoint: string, data: any): Promise<T> {
-    try {
-      const response: AxiosResponse<T> = await axios.post(`${this.baseUrl}/${endpoint}`, data);
-      return response.data;
-    } catch (error) {
-      throw this.handleApiError(error);
+  async getAllGroups() {
+    const url = `${this.baseUrl}group`;
+    const response = await fetch(url);
+  
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
     }
+  
+    return response.json();
   }
 
-  async put<T>(endpoint: string, data: any): Promise<T> {
-    try {
-      const response: AxiosResponse<T> = await axios.put(`${this.baseUrl}/${endpoint}`, data);
-      return response.data;
-    } catch (error) {
-      throw this.handleApiError(error);
+
+  // Define a function to fetch a single user by ID
+  async getUserById(id: string) {
+    const url = `${this.baseUrl}/user/${id}`;
+    const response = await fetch(url);
+
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
     }
+
+    return response.json();
   }
 
-  async delete<T>(endpoint: string): Promise<T> {
-    try {
-      const response: AxiosResponse<T> = await axios.delete(`${this.baseUrl}/${endpoint}`);
-      return response.data;
-    } catch (error) {
-      throw this.handleApiError(error);
+  //
+  // Define a function to fetch all users
+  async getAllUsers() {
+    const url = `${this.baseUrl}/user/list`;
+    const response = await fetch(url);
+
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
     }
+
+    return response.json();
   }
 
-  private handleApiError(error: AxiosError) {
-    if (error.response) {
-      // Handle the API response error (e.g., status code, error messages)
-      console.error('API Error:', error.response.status, error.response.data);
-      throw new Error(`API Error: ${error.response.status}`);
-    } else {
-      // Handle other types of errors (e.g., network issues)
-      console.error('Network Error:', error.message);
-      throw new Error('Network Error');
+  // Define a function to add a new user
+  async addUser(id: string, name: string) {
+    const url = `${this.baseUrl}/user`;
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ id, name }),
+    });
+
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
     }
+
+    return response.json();
+  }
+
+  // Define a function to update an existing user
+  async updateUser(id: string, data: any) {
+    const url = `${this.baseUrl}/user/${id}`;
+    const response = await fetch(url, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+
+    return response.json();
   }
 }
 

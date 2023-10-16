@@ -1,8 +1,8 @@
 // Feed.tsx
 import React from 'react';
 import { Box } from '@chakra-ui/react';
-import Post from './Post';
-import { UserData } from './data';
+import Post from '../post/Post';
+import { UserData } from '../home/data';
 
 interface FeedProps {
   data: UserData;

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Button, useDisclosure } from '@chakra-ui/react';
 import ModalComponent from '../modal/ModalComponent';
-import { userData } from './data';
+import { userData } from '../home/data';
 import KeycloakService from '../../services/KeycloakService';
 
 const CreatePost = () => {

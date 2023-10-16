@@ -2,8 +2,8 @@ import Keycloak, { KeycloakInstance } from "keycloak-js";
 
 const _keycloak: KeycloakInstance = new Keycloak("keycloak.json");
 
-const initKeycloak = (onAuthenticated: () => void): void => {
-  _keycloak
+const initKeycloak = (onAuthenticated: () => void): Promise<void> => {
+  return _keycloak
     .init({
       onLoad: "check-sso",
       silentCheckSsoRedirectUri:
@@ -58,7 +58,7 @@ const updateToken = (successCallback: () => void): void => {
  */
 const getUsername = (): string | undefined => _keycloak.tokenParsed?.preferred_username;
 
-const getFirstName = (): string | undefined => _keycloak.tokenParsed?.preferred_firstname;
+const getName = (): string | undefined => _keycloak.tokenParsed?.name;
 
 /**
  * Check if the user has any of the given roles
@@ -69,7 +69,7 @@ const hasRole = (roles: string[]): boolean => roles.some((role) => _keycloak.has
 
 
 const KeycloakService = {
-  getFirstName,
+  getName,
   initKeycloak,
   doLogin,
   doLogout,

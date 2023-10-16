@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Box, Text, Avatar, Button, Input } from '@chakra-ui/react';
-import { Post, userData } from './data';
+import { Post, userData, Comment, UserData } from '../home/data';
 import '../css/Feed.css';
 import KeycloakService from '../../services/KeycloakService';
 
@@ -8,10 +8,11 @@ interface PostProps {
   post: Post;
 }
 
-const userName = userData.user.name
-
 const PostComponent: React.FC<PostProps> = ({ post }) => {
   const [newComment, setNewComment] = useState('');
+
+  // Use a state variable to manage the user data
+  const [updatedUserData, setUpdatedUserData] = useState<UserData>(userData);
 
   const handleAddComment = () => {
     if (KeycloakService.isLoggedIn()) {
@@ -37,8 +38,8 @@ const PostComponent: React.FC<PostProps> = ({ post }) => {
   return (
     <Box className="post">
       <Box className="post-header">
-        <Avatar name={userName} src={userData.user.avatar} />
-        <Text className="author">{userName}</Text>
+        <Avatar name={updatedUserData.user.name} src={updatedUserData.user.avatar} />
+        <Text className="author">{updatedUserData.user.name}</Text>
       </Box>
       <Text className="post-text">{post.text}</Text>
 

@@ -1,10 +1,10 @@
 import React from 'react';
 import '../../components/css/Pages.css'
-import CreatePost from '../../components/home/CreatePost';
+import CreatePost from '../createPost/CreatePost';
 import { Box, Text } from '@chakra-ui/react';
 import KeycloakService from '../../services/KeycloakService';
-import { userData } from '../../components/home/data';
-import Feed from '../../components/home/Feed';
+import { userData } from './data';
+import Feed from '../feed/Feed';
 
 const Home = () => {
   return (
