@@ -1,18 +1,17 @@
 import React, {useState, useEffect} from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Navbar from './components/navbar/Navbar';
-import Calendar from './pages/calendar/Calendar';
-import Profile from './pages/profile/Profile';
-import Home from './pages/home/Home';
-import Login from './pages/login/Login';
-import UrlNotFound from './pages/urlNotFound/UrlNotFound'
 import KeycloakService from './services/KeycloakService';
 import { ChakraProvider, CSSReset } from '@chakra-ui/react';
 import theme from './components/chakraUI/chakra-theme';
 import withKeycloak from './hoc/withKeycloak';
-import Group from './pages/group/Group';
-
 import ApiService from './services/ApiService'; // Import the ApiService
+import HomePage from './pages/HomePage';
+import CalendarPage from './pages/CalendarPage';
+import ProfilePage from './pages/ProfilePage';
+import LoginPage from './pages/LoginPage';
+import GroupPage from './pages/GroupPage';
+import UrlNotFoundPage from './pages/UrlNotFoundPage';
 
 const apiService = new ApiService('http://localhost:8080/api/v1'); // Initialize the service with your API base URL
 
@@ -38,16 +37,16 @@ function App() {
           <AuthenticatedNavbar />
           {userLoggedIn ? (
             <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/calendar" element={<Calendar />} />
-              <Route path="/profile" element={<Profile />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/group" element={<Group />} />
-              <Route path="/*" element={<UrlNotFound />} />
+              <Route path="/" element={<HomePage />} />
+              <Route path="/calendar" element={<CalendarPage />} />
+              <Route path="/profile" element={<ProfilePage />} />
+              <Route path="/login" element={<LoginPage />} />
+              <Route path="/group" element={<GroupPage />} />
+              <Route path="/*" element={<UrlNotFoundPage />} />
             </Routes>
           ) : (
             <Routes>
-              <Route path="/login" element={<Login />} />
+              <Route path="/login" element={<LoginPage />} />
                 </Routes>
           )}
         </>

@@ -2,8 +2,8 @@ import Keycloak, { KeycloakInstance } from "keycloak-js";
 
 const _keycloak: KeycloakInstance = new Keycloak("keycloak.json");
 
-const initKeycloak = (onAuthenticated: () => void): void => {
-  _keycloak
+const initKeycloak = (onAuthenticated: () => void): Promise<void> => {
+  return _keycloak
     .init({
       onLoad: "check-sso",
       silentCheckSsoRedirectUri:

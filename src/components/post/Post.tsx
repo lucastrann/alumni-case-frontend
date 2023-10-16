@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Box, Text, Avatar, Button, Input } from '@chakra-ui/react';
-import { Post, userData, Comment, UserData } from './data';
+import { Post, userData, Comment, UserData } from '../home/data';
 import '../css/Feed.css';
 import KeycloakService from '../../services/KeycloakService';
 

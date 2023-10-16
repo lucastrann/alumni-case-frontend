@@ -1,6 +1,6 @@
 import React from 'react';
 import '../../components/css/Pages.css'
-import CalendarComp from '../../components/calendar/CalendarComp';
+import CalendarComp from '../calendarComponent/CalendarComp';
 import {Box, Text } from '@chakra-ui/react'
 
 const Calendar = () => {
