@@ -18,7 +18,7 @@ const Profile = () => {
         {KeycloakService.isLoggedIn() ? (
           <>
           <Text className='title'>Your Profile</Text>
-        <h1>{KeycloakService.getUsername()}</h1>
+        <h1>{KeycloakService.getName()}</h1>
       <Button colorScheme='blue' onClick={KeycloakService.doLogout}>
               Logout
             </Button>

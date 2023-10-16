@@ -60,7 +60,12 @@ const CalendarComp = () => {
           events={events}
           startAccessor={(event) => event.start}
           endAccessor={(event) => event.end}
+<<<<<<< Updated upstream
           style={{ height: 500 }}
+=======
+          style={{ height: 600 }}
+          getNow={() => new Date()} 
+>>>>>>> Stashed changes
         />
         <ModalCalendar
           isOpen={isOpen}
