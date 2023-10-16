@@ -5,7 +5,7 @@ import { Calendar as BigCalendar, momentLocalizer } from 'react-big-calendar';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import moment from 'moment';
 import 'moment/locale/en-gb';
-import ModalCalendar from './modal/ModalCalendar';
+import ModalCalendar from '../modal/ModalCalendar';
 
 moment.locale('en-gb');
 
@@ -47,20 +47,6 @@ const CalendarComp = () => {
     };
 
     handleNewEvent(newEvent);
-  };
-
-  const dateHighlighter = (event: Event, start: Date, end: Date, isSelected: boolean) => {
-    const isCurrentDate = moment(start).isSame(new Date(), 'day');
-
-    if (isCurrentDate) {
-      return {
-        style: {
-          backgroundColor: 'rgba(241, 239, 145, 0.5)',
-        },
-      };
-    }
-
-    return {};
   };
 
   return (

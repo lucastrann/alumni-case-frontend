@@ -10,6 +10,7 @@ import KeycloakService from './services/KeycloakService';
 import { ChakraProvider, CSSReset } from '@chakra-ui/react';
 import theme from './components/chakraUI/chakra-theme';
 import withKeycloak from './hoc/withKeycloak';
+import Group from './pages/group/Group';
 
 function App() {
   // Check if the user is logged in
@@ -28,6 +29,7 @@ function App() {
               <Route path="/calendar" element={<Calendar />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/login" element={<Login />} />
+              <Route path="/group" element={<Group />} />
               <Route path="/*" element={<UrlNotFound />} />
             </Routes>
           ) : (
