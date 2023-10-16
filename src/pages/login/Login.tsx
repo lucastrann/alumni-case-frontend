@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import KeycloakService from '../../services/KeycloakService';
 import './Login.css';
 import { Box, Text } from '@chakra-ui/react';
+import '../../components/css/Pages.css'
 
 const Login = () => {
   const navigate = useNavigate();
