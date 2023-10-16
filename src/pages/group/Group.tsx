@@ -1,17 +1,15 @@
 import React from 'react';
 import '../../components/css/Pages.css'
-import CalendarComp from '../../components/calendar/CalendarComp';
 import {Box, Text } from '@chakra-ui/react'
 
-const Calendar = () => {
+const Group = () => {
   return (
     <>
       <Box className='container'>
-        <Text className='title'>Calendar page</Text>
-        <CalendarComp/>
+        <Text className='title'>Group page</Text>
       </Box>
     </>
   );
 };
 
-export default Calendar;
+export default Group;

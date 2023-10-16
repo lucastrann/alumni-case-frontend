@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Box, Text, Avatar, Button, Input } from '@chakra-ui/react';
 import { Post, userData, Comment, UserData } from './data';
 import '../css/Feed.css';
+import KeycloakService from '../../services/KeycloakService';
 
 interface PostProps {
   post: Post;
@@ -14,32 +15,25 @@ const PostComponent: React.FC<PostProps> = ({ post }) => {
   const [updatedUserData, setUpdatedUserData] = useState<UserData>(userData);
 
   const handleAddComment = () => {
-    if (newComment.trim() !== '') {
-      const updatedPost = updatedUserData.posts.find((p) => p.id === post.id);
-
-      if (updatedPost) {
-        const newCommentData: Comment = {
-          id: updatedPost.comments.length + 1, // Generate a new comment ID
-          author: updatedUserData.user.name,
-          text: newComment,
-          timestamp: new Date().toUTCString(),
-        };
-
-        updatedPost.comments.push(newCommentData);
-
-        // Update the user data with the modified post
-        setUpdatedUserData({
-          ...updatedUserData,
-          posts: updatedUserData.posts.map((p) =>
-            p.id === post.id ? updatedPost : p
-          ),
-        });
-
+    if (KeycloakService.isLoggedIn()) {
+      if (newComment.trim() !== '') {
+      const author = KeycloakService.getUsername() || 'Guest';
+      post.comments.push({
+        id: post.comments.length + 1,
+        author: author,
+        text: newComment,
+        timestamp: new Date().toUTCString(),
+      });
         setNewComment('');
-      }
-      console.log(updatedUserData);
+        console.log(post.comments)
+        console.log(post)
     }
+    } else {
+      alert("login to comment")
+    }
+    
   };
+  
 
   return (
     <Box className="post">
