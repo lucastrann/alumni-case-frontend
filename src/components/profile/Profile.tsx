@@ -68,6 +68,7 @@ const Profile = () => {
       {KeycloakService.isLoggedIn() ? (
         <>
           <Text className='title'>Your Profile</Text>
+          <p>{ KeycloakService.getToken()}</p>
           <Flex alignItems="center"> {/* Center-align elements */}
             <Image
               src={userData?.picture} // Use the picture from userData

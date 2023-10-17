@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import ApiService from '../../services/ApiService';
 import { Box, Text, SimpleGrid, VStack, Badge } from '@chakra-ui/react';
+import CreateGroup from '../creategroup/CreateGroup';
+import GroupData from '../../interfaces/GroupData';
 
 const apiService = new ApiService('http://localhost:8080/api/v1/'); // Replace with your API base URL
 

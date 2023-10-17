@@ -1,4 +1,7 @@
 // ApiService.ts
+
+import GroupData from "../interfaces/GroupData";
+
 class ApiService {
   private baseUrl: string;
 
@@ -74,6 +77,24 @@ class ApiService {
 
     return response.json();
   }
+
+  async createGroup(groupData: GroupData) {
+    const url = `${this.baseUrl}/group`;
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(groupData),
+    });
+  
+    if (!response.ok) {
+      throw new Error('Failed to create a group');
+    }
+  
+    return response.json();
+  }
+  
 
   // Define a function to update an existing user
   async updateUser(id: string, data: any) {
