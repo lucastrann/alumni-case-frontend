@@ -11,7 +11,7 @@ class ApiService {
 
   async fetchUserData() {
     try {
-      const response = await fetch(`${this.baseUrl}/user/lucas`);
+      const response = await fetch(`${this.baseUrl}user/lucas`);
       if (response.ok) {
         const data = await response.json();
         return data;
@@ -58,6 +58,15 @@ class ApiService {
     }
 
     return response.json();
+  }
+
+  async getGroupUsers(groupId: number) {
+    const response = await fetch(`${this.baseUrl}group/${groupId}/user/list`);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch group users: ${response.status} ${response.statusText}`);
+    }
+    const data = await response.json();
+    return data;
   }
 
   // Define a function to add a new user
