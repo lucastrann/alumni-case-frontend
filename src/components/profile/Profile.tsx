@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import KeycloakService from '../../services/KeycloakService';
 import ApiService from '../../services/ApiService'; // Import the ApiService
 import '../css/Pages.css';
-import { Button, Box, Text, Image, Flex } from '@chakra-ui/react';
+import { Button, Box, Text, Image, Flex, Input } from '@chakra-ui/react';
 
 const apiService = new ApiService('http://localhost:8080/api/v1'); // Replace with your API base URL
 
@@ -12,21 +12,21 @@ const Profile = () => {
   const [userData, setUserData] = useState<{ name: string, picture: string, status: string, bio: string, funFact: string; } | null>(null);
 
   const handleEditClick = () => {
-  setIsEditMode(true);
+    setIsEditMode(true);
   };
-  
+
   const handleFieldChange = (fieldName: string, value: string) => {
     setUserData((prevData) => ({
       ...prevData as { name: string, picture: string, status: string, bio: string, funFact: string },
       [fieldName]: value,
     }));
   };
-  
-  
-  
+
+
+
   const handleSaveClick = () => {
     console.log('handleSaveClick called');
-    try { 
+    try {
       apiService.updateUser("user/lucas", {
         picture: userData?.picture,
         status: userData?.status,
@@ -38,12 +38,12 @@ const Profile = () => {
       console.error('Error saving user data:', error);
     }
   };
-  
+
   const handleCancelClick = () => {
     fetchUserData();
     setIsEditMode(false);
   };
-  
+
 
   useEffect(() => {
     const userHasRole = KeycloakService.hasRole(["User"]);
@@ -62,7 +62,7 @@ const Profile = () => {
       console.error(error);
     }
   };
-  
+
   return (
     <Box className='container'>
       {KeycloakService.isLoggedIn() ? (
@@ -78,74 +78,89 @@ const Profile = () => {
               borderRadius="full" // Apply circular border-radius
               boxShadow="lg" // Add a shadow for a modern look
             />
-<Box ml={10}>
-  <Text fontSize="3xl" fontWeight="bold">{KeycloakService.getName()}</Text>
-  {isEditMode ? (
-    // Render editable fields when in edit mode
+            <Box ml={10}>
+              <Text fontSize="3xl" fontWeight="bold">{KeycloakService.getName()}</Text>
+              {isEditMode ? (
+                // Render editable fields when in edit mode
                 <form onSubmit={handleSaveClick}>
-                  
+                  <Box
+                    p={4}  // Add padding for spacing inside the box
+                    mb={4} // Add margin-bottom for spacing between the box and other elements
+                    borderWidth="1px" // Set border width
+                    borderColor={isEditMode ? 'teal.500' : 'gray.300'} // Change border color when in edit mode
+                    borderRadius="md" // Add border radius for a rounded appearance
+                  >
+                    <Box mb={4}>
+                      <label>Picture LINK:</label>
+                      <Input
+                        value={userData?.picture}
+                        onChange={(e) => handleFieldChange('picture', e.target.value)}
+                      />
+                    </Box>
+                    <Box mb={4}>
+                      <label>Status:</label>
+                      <Input
+                        value={userData?.status}
+                        onChange={(e) => handleFieldChange('status', e.target.value)}
+                      />
+                    </Box>
+                    {/* Bio */}
+                    <Box mb={4}>
+                      <label>Bio:</label>
+                      <Input
+                        value={userData?.bio}
+                        onChange={(e) => handleFieldChange('bio', e.target.value)}
+                      />
+                    </Box>
+                    {/* Fun Fact */}
+                    <Box mb={4}>
+                      <label>Fun Fact:</label>
+                      <Input
+                        value={userData?.funFact}
+                        onChange={(e) => handleFieldChange('funFact', e.target.value)}
+                      />
+                    </Box>
+                  </Box>
                   <div>
-                                        <label>Picture LINK:</label>
-                    <input
-          type="text"
-          value={userData?.picture}
-          onChange={(e) => handleFieldChange('picture', e.target.value)}
-        />
+                    <Button
+                      colorScheme="teal"
+                      mr={4}
+                      mb={5}
+                      onClick={handleSaveClick}
+                    >
+                      Save
+                    </Button>
+                    <Button
+                      mb={5}
+                      colorScheme="blue"
+                      onClick={handleCancelClick}
+                    >
+                      Cancel
+                    </Button>
                   </div>
-      <div>
-        <label>Status:</label>
-        <input
-          type="text"
-          value={userData?.status}
-          onChange={(e) => handleFieldChange('status', e.target.value)}
-        />
-      </div>
-      <div>
-        <label>Bio:</label>
-        <input
-          type="text"
-          value={userData?.bio}
-          onChange={(e) => handleFieldChange('bio', e.target.value)}
-        />
-      </div>
-      <div>
-        <label>Fun Fact:</label>
-        <input
-          type="text"
-          value={userData?.funFact}
-          onChange={(e) => handleFieldChange('funFact', e.target.value)}
-        />
-      </div>
-      <div>
-        <Button type="submit" onClick={handleSaveClick}>Save</Button>
-        <Button type="button" onClick={handleCancelClick}>
-          Cancel
-        </Button>
-      </div>
-    </form>
-  ) : (
-    // Render user data when not in edit mode
-    <>
-      <Text fontSize="xl" color="gray.500">
-        {userData?.status}
-      </Text>
-      <Text fontSize="lg" color="gray.600">
-        {userData?.bio}
-      </Text>
-      <Text fontSize="lg" fontStyle="italic" mt={2}>
-        {userData?.funFact}
-      </Text>
-    </>
-  )}
-</Box>
-
+                </form>
+              ) : (
+                // Render user data when not in edit mode
+                <>
+                  <Text fontSize="xl" color="gray.500">
+                    {userData?.status}
+                  </Text>
+                  <Text fontSize="lg" color="gray.600">
+                    {userData?.bio}
+                  </Text>
+                  <Text fontSize="lg" fontStyle="italic" mt={2}>
+                    {userData?.funFact}
+                  </Text>
+                </>
+              )}
+            </Box>
           </Flex>
           <Button
             mb={5}
             colorScheme="teal" onClick={handleEditClick}>
-  Edit Settings
-</Button>
-          <Button colorScheme='blue' onClick={KeycloakService.doLogout}>
+            Edit Settings
+          </Button>
+          <Button colorScheme='red' onClick={KeycloakService.doLogout}>
             Logout
           </Button>
         </>

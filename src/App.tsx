@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Navbar from './components/navbar/Navbar';
 import KeycloakService from './services/KeycloakService';
@@ -47,7 +47,7 @@ function App() {
           ) : (
             <Routes>
               <Route path="/login" element={<LoginPage />} />
-                </Routes>
+            </Routes>
           )}
         </>
       </BrowserRouter>

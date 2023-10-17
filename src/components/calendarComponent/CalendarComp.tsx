@@ -29,7 +29,7 @@ const CalendarComp = () => {
   const handleConfirm = (eventTitle: string, startDate: string, endDate: string) => {
     const partsStart = startDate.split('/');
     const dayStart = parseInt(partsStart[0], 10);
-    const monthStart = parseInt(partsStart[1], 10) - 1; 
+    const monthStart = parseInt(partsStart[1], 10) - 1;
     const yearStart = parseInt(partsStart[2], 10);
 
     const partsEnd = endDate.split('/');
@@ -37,13 +37,13 @@ const CalendarComp = () => {
     const monthEnd = parseInt(partsEnd[1], 10) - 1;
     const yearEnd = parseInt(partsEnd[2], 10);
 
-    const start = new Date(yearStart, monthStart, dayStart, 0, 0, 0); 
+    const start = new Date(yearStart, monthStart, dayStart, 0, 0, 0);
     const end = new Date(yearEnd, monthEnd, dayEnd, 23, 59, 59);
 
     const newEvent: Event = {
       title: eventTitle,
-      start: new Date(start), 
-      end: new Date(end),  
+      start: new Date(start),
+      end: new Date(end),
     };
 
     handleNewEvent(newEvent);
@@ -61,7 +61,7 @@ const CalendarComp = () => {
           startAccessor={(event) => event.start}
           endAccessor={(event) => event.end}
           style={{ height: 600 }}
-          getNow={() => new Date()} 
+          getNow={() => new Date()}
         />
         <ModalCalendar
           isOpen={isOpen}

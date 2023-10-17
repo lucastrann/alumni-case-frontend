@@ -17,23 +17,23 @@ const PostComponent: React.FC<PostProps> = ({ post }) => {
   const handleAddComment = () => {
     if (KeycloakService.isLoggedIn()) {
       if (newComment.trim() !== '') {
-      const author = KeycloakService.getUsername() || 'Guest';
-      post.comments.push({
-        id: post.comments.length + 1,
-        author: author,
-        text: newComment,
-        timestamp: new Date().toUTCString(),
-      });
+        const author = KeycloakService.getUsername() || 'Guest';
+        post.comments.push({
+          id: post.comments.length + 1,
+          author: author,
+          text: newComment,
+          timestamp: new Date().toUTCString(),
+        });
         setNewComment('');
         console.log(post.comments)
         console.log(post)
-    }
+      }
     } else {
       alert("login to comment")
     }
-    
+
   };
-  
+
 
   return (
     <Box className="post">
