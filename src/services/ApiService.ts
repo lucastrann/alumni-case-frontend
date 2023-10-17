@@ -8,7 +8,7 @@ class ApiService {
 
   async fetchUserData() {
     try {
-      const response = await fetch(`${this.baseUrl}user/9e8ae4c6-7901-4ce3-b562-395fc411e006`);
+      const response = await fetch(`${this.baseUrl}/user/lucas`);
       if (response.ok) {
         const data = await response.json();
         return data;
@@ -77,7 +77,7 @@ class ApiService {
 
   // Define a function to update an existing user
   async updateUser(id: string, data: any) {
-    const url = `${this.baseUrl}/user/${id}`;
+    const url = `${this.baseUrl}/user/lucas`;
     const response = await fetch(url, {
       method: 'PUT',
       headers: {

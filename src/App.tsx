@@ -20,7 +20,7 @@ function App() {
 
   useEffect(() => {
     // Use the ApiService to fetch user data by ID
-    apiService.getUserById('9e8ae4c6-7901-4ce3-b562-395fc411e006').then((data) => {
+    apiService.getUserById('lucas').then((data) => {
       setUserData(data);
     });
   }, []);
