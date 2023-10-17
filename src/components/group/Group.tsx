@@ -27,6 +27,7 @@ const Group = () => {
     <>
       <Box className='container'>
         <Text className='title'>Group page</Text>
+        <CreateGroup />
         <SimpleGrid columns={2} spacing={4}>
           {groups.map((group) => (
             <VStack key={group.id} borderWidth="1px" borderRadius="lg" p={4}>
