@@ -28,7 +28,6 @@ const Groups = () => {
   const fetchGroupUsers = async (groupId: number) => {
     try {
       const data = await apiService.getGroupUsers(groupId);
-      console.log(data);
       setGroupUsers(data);
     } catch (error) {
       console.error(error);
