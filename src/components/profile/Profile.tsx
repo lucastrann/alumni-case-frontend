@@ -4,7 +4,7 @@ import ApiService from '../../services/ApiService'; // Import the ApiService
 import '../css/Pages.css';
 import { Button, Box, Text, Image, Flex, Input } from '@chakra-ui/react';
 
-const apiService = new ApiService('http://localhost:8080/api/v1'); // Replace with your API base URL
+const apiService = new ApiService(`http://localhost:8080/api/v1/`);
 
 const Profile = () => {
   const [hasRole, setRole] = useState(false);
@@ -27,7 +27,7 @@ const Profile = () => {
   const handleSaveClick = () => {
     console.log('handleSaveClick called');
     try {
-      apiService.updateUser("user/lucas", {
+      apiService.updateUser(`user/lucas`, {
         picture: userData?.picture,
         status: userData?.status,
         bio: userData?.bio,
@@ -171,4 +171,4 @@ const Profile = () => {
   );
 };
 
-export default React.memo(Profile);
+export default Profile;
