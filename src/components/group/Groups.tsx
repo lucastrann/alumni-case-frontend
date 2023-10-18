@@ -1,5 +1,5 @@
 import { SimpleGrid, VStack, Text, Badge, Box, Button, Collapse } from "@chakra-ui/react";
-import ApiService from "../../services/ApiService";
+import ApiService from "../../services/apiService";
 import React, { useState, useEffect } from "react";
 
 const apiService = new ApiService('http://localhost:8080/api/v1/'); // Replace with your API base URL

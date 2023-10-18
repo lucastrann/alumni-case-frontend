@@ -5,7 +5,7 @@ import KeycloakService from './services/KeycloakService';
 import { ChakraProvider, CSSReset } from '@chakra-ui/react';
 import theme from './components/chakraUI/chakra-theme';
 import withKeycloak from './hoc/withKeycloak';
-import ApiService from './services/ApiService'; // Import the ApiService
+import ApiService from './services/apiService'; // Import the ApiService
 import HomePage from './pages/HomePage';
 import CalendarPage from './pages/CalendarPage';
 import ProfilePage from './pages/ProfilePage';

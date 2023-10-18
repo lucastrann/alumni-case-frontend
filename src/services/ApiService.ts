@@ -37,65 +37,78 @@ class ApiService {
     return response.json();
   }
   //
-  async getAllPostsInAGroup(id: number) {
+  async getAllPostsInAGroup(groupId: number) {
     try {
-      const url = `${this.baseUrl}post/group/${id}`;
+      const url = `${this.baseUrl}post/group/${groupId}`;
       const response = await fetch(url);
       if (response.ok) {
         const data = await response.json();
         return data;
       } else {
-        throw new Error('Failed to fetch user data');
+        throw new Error('Failed to fetch posts');
       }
     } catch (error) {
-      throw new Error(`Error fetching user data: ${error}`);
+      throw new Error(`Error fetching posts: ${error}`);
     }
   }
 
-  /*async addReplyToPost(postId, newReply) {
+  async addReplyToPost(postId: number, content: string) {
     try {
-      const url = `${this.baseUrl}posts/${postId}/replies`; // Adjust the API endpoint accordingly
+      const url = `${this.baseUrl}post/${postId}/replies`;
       const response = await fetch(url, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ content: newReply }), // Assuming the API expects JSON data
+        body: JSON.stringify({ content }),
       });
-
       if (response.ok) {
-        const responseData = await response.json();
-        return responseData; // You may want to return the updated post or some confirmation
+        const data = await response.json();
+        return data;
       } else {
-        throw new Error('Failed to add a reply');
+        throw new Error('Failed to post a reply');
       }
     } catch (error) {
-      throw new Error(`Error adding reply: ${error}`);
+      throw new Error(`Error posting a reply: ${error}`);
     }
   }
 
-  // Add a reply to a post using PUT method (update post with new reply)
-  async updatePostWithReply(postId, newReply) {
+  async getAllRepliesToPost(postId: number) {
     try {
-      const url = `${this.baseUrl}posts/${postId}`; // Adjust the API endpoint accordingly
+      const url = `${this.baseUrl}post/${postId}/replies`;
+      const response = await fetch(url);
+      if (response.ok) {
+        const data = await response.json();
+        return data;
+      } else {
+        throw new Error('Failed to fetch replies');
+      }
+    } catch (error) {
+      throw new Error(`Error fetching replies: ${error}`);
+    }
+  }
+
+  async updatePostWithReply(postId: number, newReply: string) { // Provide type annotations
+    try {
+      const url = `${this.baseUrl}posts/${postId}`;
       const response = await fetch(url, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ newReply }), // You may need to adjust the request payload
+        body: JSON.stringify({ newReply }),
       });
 
       if (response.ok) {
         const responseData = await response.json();
-        return responseData; // You may want to return the updated post or some confirmation
+        return responseData;
       } else {
         throw new Error('Failed to update post with reply');
       }
     } catch (error) {
       throw new Error(`Error updating post with reply: ${error}`);
     }
-  }*/
+  }
 
   // Define a function to fetch a single user by ID
   async getUserById(id: string) {

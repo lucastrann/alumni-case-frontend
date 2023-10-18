@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Text, Image, Avatar, VStack, HStack } from '@chakra-ui/react';
-import ApiService from '../../services/ApiService';
+import { Box, Text, Image, Avatar, VStack, HStack, Input, Button } from '@chakra-ui/react';
+import ApiService from '../../services/apiService';
 
 const apiService = new ApiService('http://localhost:8080/api/v1/');
 
@@ -18,6 +18,7 @@ type Post = {
 
 const Feed: React.FC = () => {
   const [posts, setPosts] = useState<Array<Post>>([]);
+  const [replyContent, setReplyContent] = useState('');
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -31,6 +32,35 @@ const Feed: React.FC = () => {
 
     fetchPosts();
   }, []);
+
+  const postReply = async (postId: number) => {
+    try {
+      const response = await apiService.addReplyToPost(postId, replyContent);
+      console.log('Reply posted:', response);
+
+      // Load the updated replies for the current post
+      const replies = await apiService.getAllRepliesToPost(postId);
+      console.log(replies)
+
+      // Update the state to reflect the new replies
+      const updatedPosts = posts.map(post => {
+        if (post.id === postId) {
+          return {
+            ...post,
+            replies: replies,
+          };
+        }
+        return post;
+      });
+
+      setPosts(updatedPosts);
+
+      // Clear the reply input field
+      setReplyContent('');
+    } catch (error) {
+      console.error('Failed to post reply:', error);
+    }
+  };
 
   return (
     <VStack className="feed" spacing={4}>
@@ -54,11 +84,19 @@ const Feed: React.FC = () => {
           <Text padding={3}>{post.content}</Text>
           <Box>
             {post.replies.map((reply, index) => (
-              <Text key={index} padding={3}>
-                {reply.content}
-              </Text>
+              <Box key={index} borderWidth="1px" borderRadius="lg" overflow="hidden" boxShadow="md" width="100%" maxW="xl">
+                <Text padding={3}>{reply.content}</Text>
+              </Box>
             ))}
           </Box>
+          {/* Input field for posting a reply */}
+          <Input
+            value={replyContent}
+            onChange={(e) => setReplyContent(e.target.value)}
+            placeholder="Write a reply..."
+            padding={3}
+          />
+          <Button onClick={() => postReply(post.id)}>Post Reply</Button>
         </Box>
       ))}
     </VStack>
