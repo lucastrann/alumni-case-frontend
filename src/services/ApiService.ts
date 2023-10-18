@@ -182,11 +182,11 @@ class ApiService {
 
   // Define a function to update an existing user
   async updateUser(id: string, data: any) {
-    const url = `${this.baseUrl}/user/lucas`;
+    const url = `${this.baseUrl}user/lucas`;
     const response = await fetch(url, {
       method: 'PUT',
       headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/jsgion',
       },
       body: JSON.stringify(data),
     });
