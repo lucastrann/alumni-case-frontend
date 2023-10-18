@@ -24,7 +24,16 @@ const Feed: React.FC = () => {
     const fetchPosts = async () => {
       try {
         const fetchedPosts = await apiService.getAllPostsInAGroup(2);
-        setPosts(fetchedPosts);
+
+        // Fetch replies for each post
+        const postsWithReplies = await Promise.all(
+          fetchedPosts.map(async (post: any) => {
+            const replies = await apiService.getAllRepliesToPost(post.id);
+            return { ...post, replies };
+          })
+        );
+
+        setPosts(postsWithReplies);
       } catch (error) {
         console.error(error);
       }
@@ -40,10 +49,9 @@ const Feed: React.FC = () => {
 
       // Load the updated replies for the current post
       const replies = await apiService.getAllRepliesToPost(postId);
-      console.log(replies)
 
       // Update the state to reflect the new replies
-      const updatedPosts = posts.map(post => {
+      const updatedPosts = posts.map((post) => {
         if (post.id === postId) {
           return {
             ...post,
@@ -84,7 +92,15 @@ const Feed: React.FC = () => {
           <Text padding={3}>{post.content}</Text>
           <Box>
             {post.replies.map((reply, index) => (
-              <Box key={index} borderWidth="1px" borderRadius="lg" overflow="hidden" boxShadow="md" width="100%" maxW="xl">
+              <Box
+                key={index}
+                borderWidth="1px"
+                borderRadius="lg"
+                overflow="hidden"
+                boxShadow="md"
+                width="100%"
+                maxW="xl"
+              >
                 <Text padding={3}>{reply.content}</Text>
               </Box>
             ))}
