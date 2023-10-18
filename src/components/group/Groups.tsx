@@ -59,7 +59,7 @@ const Groups = () => {
             >
               <Text fontSize="xl">{group.name}</Text>
               <Text color="gray.500">{group.description}</Text>
-              {group.private && <Badge colorScheme="pink">Private</Badge>}
+              {group.private && <Badge colorScheme={group.color}>Color</Badge>}
             </VStack>
             <Collapse in={userListVisible && group.id === activeGroupId}>
               <VStack borderWidth="1px" borderRadius="lg" p={4}>
