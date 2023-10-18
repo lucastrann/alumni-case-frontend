@@ -28,6 +28,7 @@ const Profile = () => {
     console.log('handleSaveClick called');
     try {
       apiService.updateUser(`user/lucas`, {
+        name: userData?.name,
         picture: userData?.picture,
         status: userData?.status,
         bio: userData?.bio,
@@ -79,6 +80,7 @@ const Profile = () => {
             />
             <Box ml={10}>
               <Text fontSize="3xl" fontWeight="bold">{KeycloakService.getName()}</Text>
+              <Text fontSize="2xl" fontWeight="bold">{userData?.name}</Text>
               {isEditMode ? (
                 // Render editable fields when in edit mode
                 <form onSubmit={handleSaveClick}>
@@ -94,6 +96,13 @@ const Profile = () => {
                       <Input
                         value={userData?.picture}
                         onChange={(e) => handleFieldChange('picture', e.target.value)}
+                      />
+                    </Box>
+                    <Box mb={4}>
+                      <label>Name:</label>
+                      <Input
+                        value={userData?.name}
+                        onChange={(e) => handleFieldChange('name', e.target.value)}
                       />
                     </Box>
                     <Box mb={4}>
