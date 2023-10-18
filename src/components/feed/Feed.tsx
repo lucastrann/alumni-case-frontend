@@ -23,11 +23,11 @@ const Feed: React.FC = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const fetchedPosts = await apiService.getAllPostsInAGroup(2);
+        const fetchedPosts: Post[] = await apiService.getAllPostsInAGroup(2);
 
         // Fetch replies for each post
         const postsWithReplies = await Promise.all(
-          fetchedPosts.map(async (post: any) => {
+          fetchedPosts.map(async (post) => {
             const replies = await apiService.getAllRepliesToPost(post.id);
             return { ...post, replies };
           })
@@ -101,6 +101,7 @@ const Feed: React.FC = () => {
                 width="100%"
                 maxW="xl"
               >
+                <Text>{post.senderId.name}</Text>
                 <Text padding={3}>{reply.content}</Text>
               </Box>
             ))}
