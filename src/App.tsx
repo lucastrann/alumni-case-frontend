@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Navbar from './components/navbar/Navbar';
 import KeycloakService from './services/KeycloakService';
@@ -20,7 +20,7 @@ function App() {
 
   useEffect(() => {
     // Use the ApiService to fetch user data by ID
-    apiService.getUserById('9e8ae4c6-7901-4ce3-b562-395fc411e006').then((data) => {
+    apiService.getUserById('lucas').then((data) => {
       setUserData(data);
     });
   }, []);
@@ -47,7 +47,7 @@ function App() {
           ) : (
             <Routes>
               <Route path="/login" element={<LoginPage />} />
-                </Routes>
+            </Routes>
           )}
         </>
       </BrowserRouter>
