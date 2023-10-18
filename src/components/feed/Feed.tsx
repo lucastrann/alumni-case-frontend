@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Box, Text, Image, Avatar, VStack, HStack, Input, Button } from '@chakra-ui/react';
-import ApiService from '../../services/apiService';
+import ApiService from '../../services/ApiService';
 
 const apiService = new ApiService('http://localhost:8080/api/v1/');
 

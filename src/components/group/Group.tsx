@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import ApiService from '../../services/apiService';
+import ApiService from '../../services/ApiService';
 import { Box, Text, SimpleGrid, VStack, Badge } from '@chakra-ui/react';
 import CreateGroup from '../creategroup/CreateGroup';
 import Groups from './Groups';

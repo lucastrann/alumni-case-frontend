@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import KeycloakService from '../../services/KeycloakService';
-import ApiService from '../../services/apiService'; // Import the ApiService
+import ApiService from '../../services/ApiService'; // Import the ApiService
 import '../css/Pages.css';
 import { Button, Box, Text, Image, Flex, Input } from '@chakra-ui/react';
 

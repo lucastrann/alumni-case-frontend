@@ -12,7 +12,7 @@ import {
   Checkbox,
 } from '@chakra-ui/react';
 
-import ApiService from '../../services/apiService';
+import ApiService from '../../services/ApiService';
 
 interface ModalComponentProps {
   isOpen: boolean;
