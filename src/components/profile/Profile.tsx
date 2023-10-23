@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import KeycloakService from '../../services/KeycloakService';
-import ApiService from '../../services/ApiService'; // Import the ApiService
+import ApiService from '../../services/ApiService';
 import '../css/Pages.css';
 import { Button, Box, Text, Image, Flex, Input } from '@chakra-ui/react';
 
-const apiService = new ApiService('alumni-web.azurewebsites.net/api/v1', `'${KeycloakService.getToken()}`);
-console.log(KeycloakService.getToken())
 
 const Profile = () => {
   const [hasRole, setRole] = useState(false);
   const [isEditMode, setIsEditMode] = useState(false);
   const [userData, setUserData] = useState<{ name: string, picture: string, status: string, bio: string, funFact: string; } | null>(null);
+  const apiService = new ApiService('https://alumni-web.azurewebsites.net/api/v1/', `${KeycloakService.getToken()}`);
 
   const handleEditClick = () => {
     setIsEditMode(true);
@@ -23,6 +22,7 @@ const Profile = () => {
     }));
   };
 
+  console.log(KeycloakService.getToken())
 
 
   const handleSaveClick = () => {
@@ -59,6 +59,7 @@ const Profile = () => {
   const fetchUserData = async () => {
     try {
       const data = await apiService.fetchUserData();
+      console.log(data)
       setUserData(data);
     } catch (error) {
       console.error(error);

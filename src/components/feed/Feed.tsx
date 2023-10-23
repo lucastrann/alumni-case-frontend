@@ -4,11 +4,11 @@ import ApiService from '../../services/ApiService';
 import Post from '../../types/Post';
 import KeycloakService from '../../services/KeycloakService';
 
-const apiService = new ApiService('alumni-web.azurewebsites.net/api/v1/', `${KeycloakService.getToken()}`);
 
 const Feed: React.FC = () => {
   const [posts, setPosts] = useState<Array<Post>>([]);
   const [replyContent, setReplyContent] = useState('');
+  const apiService = new ApiService('https://alumni-web.azurewebsites.net/api/v1/', `${KeycloakService.getToken()}`);
 
   useEffect(() => {
     const fetchPosts = async () => {

@@ -18,7 +18,7 @@ class ApiService {
 
   async fetchUserData() {
     try {
-      const response = await fetch(`${this.baseUrl}user/lucas`, {
+      const response = await fetch(`${this.baseUrl}users`, {
         headers: this.createHeaders(),
       });
       if (response.ok) {
@@ -47,7 +47,24 @@ class ApiService {
 
   async getAllPostsInAGroup(groupId: number) {
     try {
-      const url = `${this.baseUrl}post/group/${groupId}`;
+      const url = `${this.baseUrl}posts/group/${groupId}`;
+      const response = await fetch(url, {
+        headers: this.createHeaders(),
+      });
+      if (response.ok) {
+        const data = await response.json();
+        return data;
+      } else {
+        throw new Error('Failed to fetch posts');
+      }
+    } catch (error) {
+      throw new Error(`Error fetching posts: ${error}`);
+    }
+  }
+
+  async getAllPosts(groupId: number) {
+    try {
+      const url = `${this.baseUrl}posts/group/${groupId}`;
       const response = await fetch(url, {
         headers: this.createHeaders(),
       });

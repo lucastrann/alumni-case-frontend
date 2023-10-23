@@ -4,12 +4,11 @@ import React, { useState, useEffect } from "react";
 import KeycloakService from "../../services/KeycloakService";
 
 
-const apiService = new ApiService('alumni-web.azurewebsites.net/api/v1/', `${KeycloakService.getToken()}`);
-
 const Groups = () => {
   const [groups, setGroups] = useState<Array<{ id: number; name: string; description: string; color: string; private: boolean; }>>([]);
   const [activeGroupId, setActiveGroupId] = useState<number | null>(null);
   const [groupUsers, setGroupUsers] = useState<{ id: string; name: string }[]>([]);
+  const apiService = new ApiService('https://alumni-web.azurewebsites.net/api/v1/', `${KeycloakService.getToken()}`);
 
   const [userListVisible, setUserListVisible] = useState(false);
 
