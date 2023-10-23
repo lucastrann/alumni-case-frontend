@@ -137,7 +137,7 @@ class ApiService {
   }
 
   async getUserById(id: string) {
-    const url = `${this.baseUrl}/user/${id}`;
+    const url = `${this.baseUrl}/users/${id}`;
     const response = await fetch(url, {
       headers: this.createHeaders(),
     });
@@ -150,7 +150,7 @@ class ApiService {
   }
 
   async getAllUsers() {
-    const url = `${this.baseUrl}/user/list`;
+    const url = `${this.baseUrl}/users/list`;
     const response = await fetch(url, {
       headers: this.createHeaders(),
     });
@@ -163,7 +163,7 @@ class ApiService {
   }
 
   async getGroupUsers(groupId: number) {
-    const response = await fetch(`${this.baseUrl}group/${groupId}/user/list`, {
+    const response = await fetch(`${this.baseUrl}group/${groupId}/users/list`, {
       headers: this.createHeaders(),
     });
     if (!response.ok) {
@@ -174,7 +174,7 @@ class ApiService {
   }
 
   async addUser(id: string, name: string) {
-    const url = `${this.baseUrl}/user`;
+    const url = `${this.baseUrl}/users`;
     const response = await fetch(url, {
       method: 'POST',
       headers: this.createHeaders(),
@@ -204,7 +204,7 @@ class ApiService {
   }
 
   async updateUser(id: string, data: any) {
-    const url = `${this.baseUrl}user/${KeycloakService.getUserId()}`;
+    const url = `${this.baseUrl}users/${KeycloakService.getUserId()}`;
     const response = await fetch(url, {
       method: 'PUT',
       headers: this.createHeaders(),
