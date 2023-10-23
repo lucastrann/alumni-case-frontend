@@ -13,6 +13,7 @@ import {
 } from '@chakra-ui/react';
 
 import ApiService from '../../services/ApiService';
+import KeycloakService from '../../services/KeycloakService';
 
 interface ModalComponentProps {
   isOpen: boolean;
@@ -32,7 +33,7 @@ const ModalCreateGroup: React.FC<ModalComponentProps> = ({ isOpen, onClose, titl
   const handleConfirm = async () => {
     try {
       // Make the API call to create a group with formData
-      const apiService = new ApiService('http://localhost:8080/api/v1');
+      const apiService = new ApiService('alumni-web.azurewebsites.net/api/v1', `${KeycloakService.getToken()}`);
       await apiService.createGroup(formData);
       console.log(formData);
 

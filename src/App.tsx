@@ -13,7 +13,7 @@ import LoginPage from './pages/LoginPage';
 import GroupPage from './pages/GroupPage';
 import UrlNotFoundPage from './pages/UrlNotFoundPage';
 
-const apiService = new ApiService('http://localhost:8080/api/v1'); // Initialize the service with your API base URL
+const apiService = new ApiService('alumni-web.azurewebsites.net/api/v1', `${KeycloakService.getToken()}`);
 
 function App() {
   const [userData, setUserData] = useState<any | null>(null);
