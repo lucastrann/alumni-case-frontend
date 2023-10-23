@@ -22,13 +22,12 @@ const Profile = () => {
     }));
   };
 
-  console.log(KeycloakService.getToken())
 
 
   const handleSaveClick = () => {
     console.log('handleSaveClick called');
     try {
-      apiService.updateUser(`user/lucas`, {
+      apiService.updateUser(`users/${KeycloakService.getUserId()}`, {
         name: userData?.name,
         picture: userData?.picture,
         status: userData?.status,
@@ -46,6 +45,8 @@ const Profile = () => {
     setIsEditMode(false);
   };
 
+  console.log(KeycloakService.getToken())
+
 
   useEffect(() => {
     const userHasRole = KeycloakService.hasRole(["User"]);
@@ -59,7 +60,6 @@ const Profile = () => {
   const fetchUserData = async () => {
     try {
       const data = await apiService.fetchUserData();
-      console.log(data)
       setUserData(data);
     } catch (error) {
       console.error(error);
@@ -71,7 +71,6 @@ const Profile = () => {
       {KeycloakService.isLoggedIn() ? (
         <>
           <Text className='title'>Your Profile</Text>
-          <p>{KeycloakService.getToken()}</p>
           <Flex alignItems="center"> {/* Center-align elements */}
             <Image
               src={userData?.picture} 
@@ -82,7 +81,6 @@ const Profile = () => {
               boxShadow="lg" 
             />
             <Box ml={10}>
-              <Text fontSize="3xl" fontWeight="bold">{KeycloakService.getName()}</Text>
               <Text fontSize="2xl" fontWeight="bold">{userData?.name}</Text>
               {isEditMode ? (
                 // Render editable fields when in edit mode
