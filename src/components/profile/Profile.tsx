@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import KeycloakService from '../../services/KeycloakService';
-import ApiService from '../../services/ApiService'; // Import the ApiService
+import ApiService from '../../services/ApiService';
 import '../css/Pages.css';
 import { Button, Box, Text, Image, Flex, Input } from '@chakra-ui/react';
 
-const apiService = new ApiService(`http://localhost:8080/api/v1/`);
 
 const Profile = () => {
   const [hasRole, setRole] = useState(false);
   const [isEditMode, setIsEditMode] = useState(false);
   const [userData, setUserData] = useState<{ name: string, picture: string, status: string, bio: string, funFact: string; } | null>(null);
+  const apiService = new ApiService('https://alumni-web.azurewebsites.net/api/v1/', `${KeycloakService.getToken()}`);
 
   const handleEditClick = () => {
     setIsEditMode(true);
@@ -22,6 +22,7 @@ const Profile = () => {
     }));
   };
 
+  console.log(KeycloakService.getToken())
 
 
   const handleSaveClick = () => {
@@ -58,6 +59,7 @@ const Profile = () => {
   const fetchUserData = async () => {
     try {
       const data = await apiService.fetchUserData();
+      console.log(data)
       setUserData(data);
     } catch (error) {
       console.error(error);
@@ -69,14 +71,15 @@ const Profile = () => {
       {KeycloakService.isLoggedIn() ? (
         <>
           <Text className='title'>Your Profile</Text>
+          <p>{KeycloakService.getToken()}</p>
           <Flex alignItems="center"> {/* Center-align elements */}
             <Image
-              src={userData?.picture} // Use the picture from userData
+              src={userData?.picture} 
               alt="User Profile"
-              boxSize="200px" // Set the image size
-              objectFit="cover" // Crop image to fit the box
-              borderRadius="full" // Apply circular border-radius
-              boxShadow="lg" // Add a shadow for a modern look
+              boxSize="200px"
+              objectFit="cover"
+              borderRadius="full"
+              boxShadow="lg" 
             />
             <Box ml={10}>
               <Text fontSize="3xl" fontWeight="bold">{KeycloakService.getName()}</Text>

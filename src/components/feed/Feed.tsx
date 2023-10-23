@@ -1,24 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Box, Text, Image, Avatar, VStack, HStack, Input, Button } from '@chakra-ui/react';
 import ApiService from '../../services/ApiService';
+import Post from '../../types/Post';
+import KeycloakService from '../../services/KeycloakService';
 
-const apiService = new ApiService('http://localhost:8080/api/v1/');
-
-type Post = {
-  id: number;
-  title: string;
-  content: string;
-  replies: Array<{ content: string }>;
-  senderId: {
-    id: string;
-    name: string;
-    picture: string;
-  };
-};
 
 const Feed: React.FC = () => {
   const [posts, setPosts] = useState<Array<Post>>([]);
   const [replyContent, setReplyContent] = useState('');
+  const apiService = new ApiService('https://alumni-web.azurewebsites.net/api/v1/', `${KeycloakService.getToken()}`);
 
   useEffect(() => {
     const fetchPosts = async () => {

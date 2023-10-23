@@ -1,13 +1,14 @@
 import { SimpleGrid, VStack, Text, Badge, Box, Button, Collapse } from "@chakra-ui/react";
 import ApiService from "../../services/ApiService";
 import React, { useState, useEffect } from "react";
+import KeycloakService from "../../services/KeycloakService";
 
-const apiService = new ApiService('http://localhost:8080/api/v1/'); // Replace with your API base URL
 
 const Groups = () => {
   const [groups, setGroups] = useState<Array<{ id: number; name: string; description: string; color: string; private: boolean; }>>([]);
   const [activeGroupId, setActiveGroupId] = useState<number | null>(null);
   const [groupUsers, setGroupUsers] = useState<{ id: string; name: string }[]>([]);
+  const apiService = new ApiService('https://alumni-web.azurewebsites.net/api/v1/', `${KeycloakService.getToken()}`);
 
   const [userListVisible, setUserListVisible] = useState(false);
 
