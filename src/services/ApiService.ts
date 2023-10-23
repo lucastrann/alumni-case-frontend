@@ -1,4 +1,5 @@
 import GroupData from "../interfaces/GroupData";
+import KeycloakService from "./KeycloakService";
 
 class ApiService {
   private baseUrl: string;
@@ -203,7 +204,7 @@ class ApiService {
   }
 
   async updateUser(id: string, data: any) {
-    const url = `${this.baseUrl}user/lucas`;
+    const url = `${this.baseUrl}user/${KeycloakService.getUserId()}`;
     const response = await fetch(url, {
       method: 'PUT',
       headers: this.createHeaders(),

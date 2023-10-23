@@ -24,11 +24,14 @@ const Profile = () => {
 
   console.log(KeycloakService.getToken())
 
+  console.log(KeycloakService.getUsername())
+  console.log(KeycloakService.getUserId())
+
 
   const handleSaveClick = () => {
     console.log('handleSaveClick called');
     try {
-      apiService.updateUser(`user/lucas`, {
+      apiService.updateUser(`user/${KeycloakService.getUserId()}`, {
         name: userData?.name,
         picture: userData?.picture,
         status: userData?.status,
