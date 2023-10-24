@@ -93,14 +93,14 @@ const Feed: React.FC = () => {
           <Box
             key={post.id}
             borderWidth="1px"
-            borderRadius="lg"
+            borderRadius={30}
             overflow="hidden"
             boxShadow="md"
             width="100%"
             maxW="xl"
             bg={colorMode === 'light' ? 'gray.100' : 'gray.700'}
             color={colorMode === 'light' ? 'gray.800' : 'white'}
-            p={4} 
+            p={6}
           >
             <HStack spacing={3} pb={2}>
               <Avatar src={post.senderId.picture} name={post.senderId.name} />
@@ -116,8 +116,8 @@ const Feed: React.FC = () => {
               {post.replies.map((reply, index) => (
                 <Box
                   key={index}
-                  borderWidth="1px"
-                  borderRadius="lg"
+                  borderWidth={2}
+                  borderRadius={30}
                   overflow="hidden"
                   boxShadow="md"
                   width="100%"
@@ -125,9 +125,10 @@ const Feed: React.FC = () => {
                   bg={colorMode === 'light' ? 'light.replyBg' : 'dark.replyBg'}
                   color={colorMode === 'light' ? 'light.text' : 'dark.text'}
                   p={3}
-                  my={2} 
+                  my={1}
+                  position="relative" // Added relative positioning
                 >
-                  <HStack pb={2}>
+                  <HStack pb={0}>
                     <Text fontWeight="bold" fontSize="md">
                       {reply.senderId.name}
                     </Text>
@@ -138,12 +139,19 @@ const Feed: React.FC = () => {
             </Box>
             <HStack spacing={3} mt={3}>
               <Input
+                borderWidth={2}
+                borderRadius={30}
+                bg={colorMode === 'light' ? 'light.replyBg' : 'dark.replyBg'}
                 value={replyContents[post.id] || ''}
                 onChange={(e) => handleReplyContentChange(post.id, e.target.value)}
                 placeholder="Write a reply..."
               />
-              <Button onClick={() => postReply(post.id)} colorScheme="teal" variant="solid">
-                Post Reply
+              <Button onClick={() => postReply(post.id)}
+                borderWidth="1px"
+                borderRadius={13}
+                bg={colorMode === 'light' ? 'light.buttonBg' : 'dark.buttonBg'}
+                variant="solid">
+                Reply
               </Button>
             </HStack>
           </Box>

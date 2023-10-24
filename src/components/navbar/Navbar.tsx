@@ -44,7 +44,7 @@ const Navbar: React.FC = () => {
             as={RouterLink}
             to="/"
             color={colorMode === 'dark' ? 'white' : 'gray.800'}
-            fontSize={22}
+            fontSize={20}
             mr={10}
             _hover={{
               color: colorMode === 'dark' ? 'teal.300' : 'teal.600',
@@ -57,7 +57,7 @@ const Navbar: React.FC = () => {
             as={RouterLink}
             to="/calendar"
             color={colorMode === 'dark' ? 'white' : 'gray.800'}
-            fontSize={22}
+            fontSize={20}
             mr={10}
             _hover={{
               color: colorMode === 'dark' ? 'teal.300' : 'teal.600',
@@ -70,7 +70,7 @@ const Navbar: React.FC = () => {
             as={RouterLink}
             to="/group"
             color={colorMode === 'dark' ? 'white' : 'gray.800'}
-            fontSize={22}
+            fontSize={20}
             mr={10}
             _hover={{
               color: colorMode === 'dark' ? 'teal.300' : 'teal.600',
@@ -83,7 +83,7 @@ const Navbar: React.FC = () => {
             as={RouterLink}
             to="/profile"
             color={colorMode === 'dark' ? 'white' : 'gray.800'}
-            fontSize={22}
+            fontSize={20}
             _hover={{
               color: colorMode === 'dark' ? 'teal.300' : 'teal.600',
               transform: 'scale(1.25)', 

@@ -139,7 +139,7 @@ const Profile = () => {
                       </Box>
                       <div>
                         <Button
-                          colorScheme="teal"
+                          bg={colorMode === 'light' ? 'light.buttonBg' : 'dark.buttonBg'}
                           mr={4}
                           mb={5}
                           onClick={handleSaveClick}
@@ -174,7 +174,7 @@ const Profile = () => {
           )}
           <Button
             mb={5}
-            colorScheme="teal"
+            bg={colorMode === 'light' ? 'light.buttonBg' : 'dark.buttonBg'}
             onClick={handleEditClick}
           >
             Edit Settings
