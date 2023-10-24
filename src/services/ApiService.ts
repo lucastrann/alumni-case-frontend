@@ -81,13 +81,16 @@ class ApiService {
   }
 
   async addReplyToPost(postId: number, content: string) {
+    const url = `${this.baseUrl}posts/${postId}/replies`;
+
+    const options = {
+      method: 'POST',
+      headers: this.createHeaders(),
+      body: JSON.stringify({ content: content }),
+    };
+
     try {
-      const url = `${this.baseUrl}posts/${postId}/replies`;
-      const response = await fetch(url, {
-        method: 'POST',
-        headers: this.createHeaders(),
-        body: JSON.stringify({ content }),
-      });
+      const response = await fetch(url, options);
       if (response.ok) {
         const data = await response.json();
         return data;

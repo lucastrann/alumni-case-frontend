@@ -1,8 +1,16 @@
-import { SimpleGrid, VStack, Text, Badge, Box, Button, Collapse } from "@chakra-ui/react";
+import React, { useState, useEffect } from 'react';
+import {
+  SimpleGrid,
+  VStack,
+  Text,
+  Badge,
+  Box,
+  Button,
+  Collapse,
+  Spinner, // Import the Spinner component
+} from "@chakra-ui/react";
 import ApiService from "../../services/ApiService";
-import React, { useState, useEffect } from "react";
 import KeycloakService from "../../services/KeycloakService";
-
 
 const Groups = () => {
   const [groups, setGroups] = useState<Array<{ id: number; name: string; description: string; color: string; private: boolean; }>>([]);
@@ -11,6 +19,7 @@ const Groups = () => {
   const apiService = new ApiService('https://alumni-web.azurewebsites.net/api/v1/', `${KeycloakService.getToken()}`);
 
   const [userListVisible, setUserListVisible] = useState(false);
+  const [loading, setLoading] = useState(true); 
 
   useEffect(() => {
     // Fetch groups when the component mounts
@@ -21,6 +30,7 @@ const Groups = () => {
     try {
       const data = await apiService.getAllGroups();
       setGroups(data);
+      setLoading(false); 
     } catch (error) {
       console.error(error);
     }
@@ -41,38 +51,43 @@ const Groups = () => {
       setUserListVisible(false);
     } else {
       setActiveGroupId(groupId);
-      fetchGroupUsers(groupId); // Fetch users for the selected group
+      fetchGroupUsers(groupId); 
       setUserListVisible(true);
     }
   };
 
   return (
     <>
-      <SimpleGrid columns={2} spacing={4}>
-        {groups.map((group) => (
-          <Box key={group.id}>
-            <VStack
-              borderWidth="1px"
-              borderRadius="lg"
-              p={4}
-              onClick={() => handleGroupClick(group.id)}
-              _hover={{ cursor: "pointer" }}
-            >
-              <Text fontSize="xl">{group.name}</Text>
-              <Text color="gray.500">{group.description}</Text>
-              {group.private && <Badge colorScheme={group.color}>Color</Badge>}
-            </VStack>
-            <Collapse in={userListVisible && group.id === activeGroupId}>
-              <VStack borderWidth="1px" borderRadius="lg" p={4}>
-                <Text fontSize="lg" fontWeight="bold">Users in this Group:</Text>
-                {groupUsers.map((user) => (
-                  <Text key={user.id} fontSize="md">{user.name}</Text>
-                ))}
-              </VStack>
-            </Collapse>
-          </Box>
-        ))}
-      </SimpleGrid>
+      {loading ? (
+        // Display a spinner while loading data
+        <Spinner size="xl" thickness="4px" speed="0.65s" emptyColor="gray.200" color="blue.500" />
+      ) : (
+          <SimpleGrid columns={2} spacing={4}>
+            {groups.map((group) => (
+              <Box key={group.id}>
+                <VStack
+                  borderWidth="1px"
+                  borderRadius="lg"
+                  p={4}
+                  onClick={() => handleGroupClick(group.id)}
+                  _hover={{ cursor: "pointer" }}
+                >
+                  <Text fontSize="xl">{group.name}</Text>
+                  <Text color="gray.500">{group.description}</Text>
+                  {group.private && <Badge colorScheme={group.color}>Color</Badge>}
+                </VStack>
+                <Collapse in={userListVisible && group.id === activeGroupId}>
+                  <VStack borderWidth="1px" borderRadius="lg" p={4}>
+                    <Text fontSize="lg" fontWeight="bold">Users in this Group:</Text>
+                    {groupUsers.map((user) => (
+                      <Text key={user.id} fontSize="md">{user.name}</Text>
+                    ))}
+                  </VStack>
+                </Collapse>
+              </Box>
+            ))}
+          </SimpleGrid>
+      )}
     </>
   );
 };
