@@ -63,9 +63,9 @@ class ApiService {
     }
   }
 
-  async getAllPosts(groupId: number) {
+  async getAllPosts() {
     try {
-      const url = `${this.baseUrl}posts/group/${groupId}`;
+      const url = `${this.baseUrl}posts/list`;
       const response = await fetch(url, {
         headers: this.createHeaders(),
       });
@@ -79,6 +79,7 @@ class ApiService {
       throw new Error(`Error fetching posts: ${error}`);
     }
   }
+
 
   async addReplyToPost(postId: number, content: string) {
     const url = `${this.baseUrl}posts/${postId}/replies`;
@@ -99,6 +100,28 @@ class ApiService {
       }
     } catch (error) {
       throw new Error(`Error posting a reply: ${error}`);
+    }
+  }
+
+  async createPost(title: string, content: string) {
+    const url = `${this.baseUrl}posts`;
+  
+    const options = {
+      method: 'POST',
+      headers: this.createHeaders(),
+      body: JSON.stringify({ title, content }),
+    };
+  
+    try {
+      const response = await fetch(url, options);
+      if (response.ok) {
+        const data = await response.json();
+        return data;
+      } else {
+        throw new Error('Failed to create a post');
+      }
+    } catch (error) {
+      throw new Error(`Error creating a post: ${error}`);
     }
   }
 

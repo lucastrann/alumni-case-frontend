@@ -25,7 +25,7 @@ const Feed: React.FC = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const fetchedPosts: Post[] = await apiService.getAllPostsInAGroup(2);
+        const fetchedPosts: Post[] = await apiService.getAllPosts();
 
         // Fetch replies for each post
         const postsWithReplies = await Promise.all(
