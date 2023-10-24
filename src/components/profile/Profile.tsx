@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import KeycloakService from '../../services/KeycloakService';
 import ApiService from '../../services/ApiService';
 import '../css/Pages.css';
-import { Button, Box, Text, Image, Flex, Input, Spinner } from '@chakra-ui/react'; // Added Spinner
+import { Button, Box, Text, Image, Flex, Input, Spinner, useColorMode } from '@chakra-ui/react'; // Added Spinner
 
 const Profile = () => {
   const [hasRole, setRole] = useState(false);
@@ -10,6 +10,7 @@ const Profile = () => {
   const [userData, setUserData] = useState<{ name: string, picture: string, status: string, bio: string, funFact: string; } | null>(null);
   const [loading, setLoading] = useState(true); // Added loading state
   const apiService = new ApiService('https://alumni-web.azurewebsites.net/api/v1/', `${KeycloakService.getToken()}`);
+  const { colorMode, toggleColorMode } = useColorMode();
 
   const handleEditClick = () => {
     setIsEditMode(true);
@@ -21,8 +22,6 @@ const Profile = () => {
       [fieldName]: value,
     }));
   };
-
-  console.log(KeycloakService.getToken())
 
   const handleSaveClick = () => {
     try {
@@ -66,7 +65,13 @@ const Profile = () => {
   };
 
   return (
-    <Box className='container'>
+    <Box className='container'
+      borderWidth="1px"
+      borderRadius="lg"
+      overflow="hidden"
+      boxShadow="md"
+      bg={colorMode === 'light' ? 'gray.100' : 'gray.700'}
+      color={colorMode === 'light' ? 'gray.800' : 'white'}>
       {KeycloakService.isLoggedIn() ? (
         <>
           <Text className='title'>Your Profile</Text>
@@ -134,7 +139,8 @@ const Profile = () => {
                       </Box>
                       <div>
                         <Button
-                          colorScheme="teal"
+                          borderRadius={20}
+                          bg={colorMode === 'light' ? 'light.buttonBg' : 'dark.buttonBg'}
                           mr={4}
                           mb={5}
                           onClick={handleSaveClick}
@@ -168,8 +174,9 @@ const Profile = () => {
               </Flex>
           )}
           <Button
+            borderRadius={20}
             mb={5}
-            colorScheme="teal"
+            bg={colorMode === 'light' ? 'light.buttonBg' : 'dark.buttonBg'}
             onClick={handleEditClick}
           >
             Edit Settings

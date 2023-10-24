@@ -35,7 +35,6 @@ const ModalCreateGroup: React.FC<ModalComponentProps> = ({ isOpen, onClose, titl
       // Make the API call to create a group with formData
       const apiService = new ApiService('https://alumni-web.azurewebsites.net/api/v1/', `${KeycloakService.getToken()}`);
       await apiService.createGroup(formData);
-      console.log(formData);
 
       // Reset the formData
       setFormData({

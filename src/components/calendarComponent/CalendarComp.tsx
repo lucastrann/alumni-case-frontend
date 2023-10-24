@@ -1,6 +1,6 @@
 // CalendarComp.tsx
 import React, { useState } from 'react';
-import { Button, Box, Center, useDisclosure } from '@chakra-ui/react';
+import { Button, Box, Center, useDisclosure, useColorMode } from '@chakra-ui/react';
 import { Calendar as BigCalendar, momentLocalizer } from 'react-big-calendar';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import moment from 'moment';
@@ -14,6 +14,7 @@ const localizer = momentLocalizer(moment);
 const CalendarComp = () => {
   const [events, setEvents] = useState<Event[]>([]);
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { colorMode, setColorMode } = useColorMode();
 
   type Event = {
     title: string;
@@ -52,7 +53,11 @@ const CalendarComp = () => {
   return (
     <Center>
       <Box maxW="800px" p="4">
-        <Button colorScheme="teal" onClick={onOpen}>
+        <Button
+          mb={5}
+          borderRadius={20}
+          bg={colorMode === 'light' ? 'light.buttonBg' : 'dark.buttonBg'}
+          onClick={onOpen}>
           Create New Event
         </Button>
         <BigCalendar

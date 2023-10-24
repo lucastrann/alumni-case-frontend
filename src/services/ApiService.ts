@@ -34,6 +34,25 @@ class ApiService {
     }
   }
 
+  async addNewUser() {
+    const url = `${this.baseUrl}users`;
+    const options = {
+      method: 'POST',
+      headers: this.createHeaders(),
+    };
+
+      const response = await fetch(url, options);
+      if (response.ok) {
+        const contentType = response.headers.get('content-type');
+        if (contentType && contentType.includes('application/json')) {
+          const data = await response.json();
+          return data;
+        } else {
+          return null;
+        }
+      }
+  }
+
   async getAllGroups() {
     const url = `${this.baseUrl}group`;
     const response = await fetch(url, {
