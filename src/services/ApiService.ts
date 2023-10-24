@@ -38,21 +38,19 @@ class ApiService {
     const url = `${this.baseUrl}users`;
     const options = {
       method: 'POST',
-      headers: this.createHeaders(
-      )
+      headers: this.createHeaders(),
     };
 
-    try {
       const response = await fetch(url, options);
       if (response.ok) {
-        const data = await response.json();
-        return data;
-      } else {
-        throw new Error('Failed to post a new user');
+        const contentType = response.headers.get('content-type');
+        if (contentType && contentType.includes('application/json')) {
+          const data = await response.json();
+          return data;
+        } else {
+          return null;
+        }
       }
-    } catch (error) {
-      throw new Error(`Error posting a new user: ${error}`);
-    }
   }
 
   async getAllGroups() {

@@ -56,7 +56,6 @@ const Feed: React.FC = () => {
       const content = replyContents[postId];
       if (content !== undefined) {
         const response = await apiService.addReplyToPost(postId, content);
-        console.log('Reply posted:', response);
 
         // Load the updated replies for the current post
         const replies = await apiService.getAllRepliesToPost(postId);

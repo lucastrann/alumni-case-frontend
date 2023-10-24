@@ -7,8 +7,6 @@ import Feed from '../feed/Feed';
 
 const Home = () => {
 
-
-  console.log()
   return (
     <>
       <Box className='home-container'>

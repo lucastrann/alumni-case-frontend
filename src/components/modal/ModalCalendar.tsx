@@ -10,8 +10,8 @@ import {
   Button,
   Flex,
 } from "@chakra-ui/react";
-import DatePicker from "react-datepicker"; // Import DatePicker
-import "react-datepicker/dist/react-datepicker.css"; // Import DatePicker styles
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import '../css/Calendar.css';
 
 interface ModalCalendarProps {

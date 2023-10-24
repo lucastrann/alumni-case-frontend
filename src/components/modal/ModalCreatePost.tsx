@@ -31,8 +31,6 @@ const ModalCreatePost: React.FC<ModalComponentProps> = ({ isOpen, onClose, title
     try {
       const apiService = new ApiService('https://alumni-web.azurewebsites.net/api/v1/', `${KeycloakService.getToken()}`);
       await apiService.createPost(formData);
-      console.log(formData);
-      // Reset the formData
       setFormData({
         title: '',
         content: '',

@@ -13,10 +13,7 @@ const Login = () => {
 
   useEffect(() => {
     if (KeycloakService.isLoggedIn()) {
-      console.log("adding user");
       apiService.addNewUser();
-      console.log(apiService.addNewUser())
-      console.log("added user");
       navigate('/');
     }
   }, [navigate]);

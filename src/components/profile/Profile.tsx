@@ -22,8 +22,6 @@ const Profile = () => {
     }));
   };
 
-  console.log(KeycloakService.getToken())
-
   const handleSaveClick = () => {
     try {
       apiService.updateUser(`users/${KeycloakService.getUserId()}`, {
