@@ -1,7 +1,6 @@
 .container {
   position: relative;
   text-align: center;
-  background-image: url('/public/images/picture.jpg');
   background-size: cover;
   background-position: center;
   height: 100vh;
