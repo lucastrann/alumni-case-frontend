@@ -1,14 +1,12 @@
-/* Navbar.css */
 
-/* Style for the top navbar */
 .navbar {
   overflow: hidden;
   width: 100%;
   position: fixed;
   top: 0;
   display: flex;
-  justify-content: center; /* Center horizontally */
-  align-items: center; /* Center vertically */
+  justify-content: center; 
+  align-items: center;
 }
 
 /* Style for the navigation links */
@@ -29,7 +27,7 @@
   text-decoration: none;
   padding: 15px 20px;
   transition: background-color 0.3s;
-  font-size: 20px;
+  font-size: 26px;
 }
 
 /* Style for the links on hover */

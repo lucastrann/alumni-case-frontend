@@ -21,7 +21,7 @@ const Navbar: React.FC = () => {
 
     <Box
       as="nav"
-      bg={colorMode === 'dark' ? 'gray.800' : 'gray.150'}
+      bg={colorMode === 'dark' ? theme.colors.dark.navbarBg : theme.colors.light.navbarBg}
       py={3}
       px={4}
       boxShadow="md"
@@ -44,6 +44,7 @@ const Navbar: React.FC = () => {
             as={RouterLink}
             to="/"
             color={colorMode === 'dark' ? 'white' : 'gray.800'}
+            fontSize={22}
             mr={10}
             _hover={{
               color: colorMode === 'dark' ? 'teal.300' : 'teal.600',
@@ -56,6 +57,7 @@ const Navbar: React.FC = () => {
             as={RouterLink}
             to="/calendar"
             color={colorMode === 'dark' ? 'white' : 'gray.800'}
+            fontSize={22}
             mr={10}
             _hover={{
               color: colorMode === 'dark' ? 'teal.300' : 'teal.600',
@@ -68,6 +70,7 @@ const Navbar: React.FC = () => {
             as={RouterLink}
             to="/group"
             color={colorMode === 'dark' ? 'white' : 'gray.800'}
+            fontSize={22}
             mr={10}
             _hover={{
               color: colorMode === 'dark' ? 'teal.300' : 'teal.600',
@@ -80,27 +83,16 @@ const Navbar: React.FC = () => {
             as={RouterLink}
             to="/profile"
             color={colorMode === 'dark' ? 'white' : 'gray.800'}
+            fontSize={22}
             _hover={{
               color: colorMode === 'dark' ? 'teal.300' : 'teal.600',
-              transform: 'scale(1.25)', // Scale up on hover
+              transform: 'scale(1.25)', 
             }}
           >
             Profile
           </Link>
         </Flex>
         <Spacer />
-{/*         <Button
-          variant="outline"
-          borderColor={colorMode === 'dark' ? 'teal.300' : 'teal.600'}
-          color={colorMode === 'dark' ? 'white' : 'gray.800'}
-          _hover={{
-            bg: colorMode === 'dark' ? 'teal.300' : 'teal.600',
-            color: 'white',
-          }}
-          onClick={toggleColorMode}
-        >
-          {colorMode === 'dark' ? 'Light Mode' : 'Dark Mode'}
-        </Button> */}
         {!KeycloakService.isLoggedIn() && (
           <Button
             variant="outline"
