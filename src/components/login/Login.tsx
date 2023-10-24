@@ -20,7 +20,7 @@ const Login = () => {
   };
 
   return (
-    <Box className="container">
+    <Box className="login container">
       <div className="background-image">
         <Text className="title">Welcome to Alumni</Text>
         <Text className="subtitle">Connect with fellow alumni</Text>
@@ -29,7 +29,7 @@ const Login = () => {
         </button>
       </div>
     </Box>
-  );  
+  ); 
 };
 
 export default Login;
