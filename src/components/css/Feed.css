@@ -22,20 +22,3 @@
   font-size: 16px;
   margin-bottom: 8px;
 }
-
-.comments {
-  margin-top: 12px;
-}
-
-.comment {
-  padding: 8px;
-  border-radius: 4px;
-  margin-bottom: 8px;
-}
-
-.comment-input {
-  display: flex;
-  margin-top: 16px;
-}
-
-/* Add more styles as needed */

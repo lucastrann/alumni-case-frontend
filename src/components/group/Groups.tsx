@@ -7,7 +7,8 @@ import {
   Box,
   Button,
   Collapse,
-  Spinner, // Import the Spinner component
+  Spinner,
+  useColorMode, // Import the Spinner component
 } from "@chakra-ui/react";
 import ApiService from "../../services/ApiService";
 import KeycloakService from "../../services/KeycloakService";
@@ -17,7 +18,7 @@ const Groups = () => {
   const [activeGroupId, setActiveGroupId] = useState<number | null>(null);
   const [groupUsers, setGroupUsers] = useState<{ id: string; name: string }[]>([]);
   const apiService = new ApiService('https://alumni-web.azurewebsites.net/api/v1/', `${KeycloakService.getToken()}`);
-
+  const { colorMode, toggleColorMode } = useColorMode();
   const [userListVisible, setUserListVisible] = useState(false);
   const [loading, setLoading] = useState(true); 
 
@@ -64,7 +65,16 @@ const Groups = () => {
       ) : (
           <SimpleGrid columns={2} spacing={4}>
             {groups.map((group) => (
-              <Box key={group.id}>
+              <Box key={group.id}
+                borderWidth="1px"
+                borderRadius="lg"
+                overflow="hidden"
+                boxShadow="md"
+                width="100%"
+                maxW="xl"
+                bg={colorMode === 'light' ? 'gray.100' : 'gray.700'}
+                color={colorMode === 'light' ? 'gray.800' : 'white'}
+              >
                 <VStack
                   borderWidth="1px"
                   borderRadius="lg"

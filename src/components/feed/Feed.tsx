@@ -84,10 +84,10 @@ const Feed: React.FC = () => {
   };
 
   return (
-    <VStack className="feed" spacing={4}>
+    <VStack spacing={4}>
       <CreateNewPost />
       {loading ? (
-        <Spinner size="xl" color="teal.500" /> // Show spinner while loading
+        <Spinner size="xl" color="teal.500" />
       ) : (
         posts.map((post) => (
           <Box
@@ -100,7 +100,7 @@ const Feed: React.FC = () => {
             maxW="xl"
             bg={colorMode === 'light' ? 'gray.100' : 'gray.700'}
             color={colorMode === 'light' ? 'gray.800' : 'white'}
-            p={4} // Padding for the entire post box
+            p={4} 
           >
             <HStack spacing={3} pb={2}>
               <Avatar src={post.senderId.picture} name={post.senderId.name} />
@@ -124,8 +124,8 @@ const Feed: React.FC = () => {
                   maxW="xl"
                   bg={colorMode === 'light' ? 'light.replyBg' : 'dark.replyBg'}
                   color={colorMode === 'light' ? 'light.text' : 'dark.text'}
-                  p={3} // Padding for each reply box
-                  my={2} // Margin between replies
+                  p={3}
+                  my={2} 
                 >
                   <HStack pb={2}>
                     <Text fontWeight="bold" fontSize="md">
