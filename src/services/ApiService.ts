@@ -1,4 +1,5 @@
 import GroupData from "../interfaces/GroupData";
+import PostData from "../interfaces/PostData";
 import KeycloakService from "./KeycloakService";
 
 class ApiService {
@@ -63,9 +64,9 @@ class ApiService {
     }
   }
 
-  async getAllPosts(groupId: number) {
+  async getAllPosts() {
     try {
-      const url = `${this.baseUrl}posts/group/${groupId}`;
+      const url = `${this.baseUrl}posts/list`;
       const response = await fetch(url, {
         headers: this.createHeaders(),
       });
@@ -79,6 +80,7 @@ class ApiService {
       throw new Error(`Error fetching posts: ${error}`);
     }
   }
+
 
   async addReplyToPost(postId: number, content: string) {
     const url = `${this.baseUrl}posts/${postId}/replies`;
@@ -205,6 +207,29 @@ class ApiService {
   
     return response.json();
   }
+
+  async createPost(postData: PostData) {
+    const url = `${this.baseUrl}posts`;
+  
+    const options = {
+      method: 'POST',
+      headers: this.createHeaders(),
+      body: JSON.stringify(postData),
+    };
+  
+    try {
+      const response = await fetch(url, options);
+      if (response.ok) {
+        const data = await response.json();
+        return data;
+      } else {
+        throw new Error('Failed to create a post');
+      }
+    } catch (error) {
+      throw new Error(`Error creating a post: ${error}`);
+    }
+  }
+
 
   async updateUser(id: string, data: any) {
     const url = `${this.baseUrl}users/${KeycloakService.getUserId()}`;
