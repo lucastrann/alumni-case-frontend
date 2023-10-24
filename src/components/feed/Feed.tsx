@@ -14,6 +14,7 @@ import {
 import ApiService from '../../services/ApiService';
 import Post from '../../types/Post';
 import KeycloakService from '../../services/KeycloakService';
+import CreateNewPost from '../createPost/CreateNewPost';
 
 const Feed: React.FC = () => {
   const [posts, setPosts] = useState<Array<Post>>([]);
@@ -85,6 +86,7 @@ const Feed: React.FC = () => {
 
   return (
     <VStack className="feed" spacing={4}>
+      <CreateNewPost />
       {loading ? (
         <Spinner size="xl" color="teal.500" /> // Show spinner while loading
       ) : (
