@@ -12,12 +12,6 @@ const Home = () => {
   return (
     <>
       <Box className='home-container'>
-        <Text className='title'>Homepage</Text>
-        {KeycloakService.isLoggedIn() ? (
-          <p>helo</p>
-        ) : (
-            <p>You have to login to post</p>
-        )}
         <Feed />
       </Box>
     </>

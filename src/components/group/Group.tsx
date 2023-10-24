@@ -9,7 +9,6 @@ const Group = () => {
   return (
     <>
       <Box className='container'>
-        <Text className='title'>Group page</Text>
         <CreateGroup />
         <Groups />
       </Box>

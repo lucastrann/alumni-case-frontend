@@ -25,7 +25,6 @@
 }
 
 .navbar a {
-  color: rgb(255, 255, 255);
   text-align: center;
   text-decoration: none;
   padding: 15px 20px;
@@ -35,7 +34,6 @@
 
 /* Style for the links on hover */
 .navbar a:hover {
-  background-color: #ddd;
   color: black;
 }
 

@@ -7,7 +7,6 @@ const Calendar = () => {
   return (
     <>
       <Box className='container'>
-        <Text className='title'>Calendar page</Text>
         <CalendarComp/>
       </Box>
     </>

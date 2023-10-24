@@ -1,20 +1,28 @@
-// ApiService.ts
-
 import GroupData from "../interfaces/GroupData";
+import PostData from "../interfaces/PostData";
+import KeycloakService from "./KeycloakService";
 
 class ApiService {
-  static getAllPostsInAGroup(arg0: number) {
-    throw new Error('Method not implemented.');
-  }
   private baseUrl: string;
+  private authToken: string; 
 
-  constructor(baseUrl: string) {
+  constructor(baseUrl: string, authToken: string) {
     this.baseUrl = baseUrl;
+    this.authToken = authToken;
+  }
+
+  private createHeaders() {
+    return {
+      'Authorization': `Bearer ${this.authToken}`,
+      'Content-Type': 'application/json',
+    };
   }
 
   async fetchUserData() {
     try {
-      const response = await fetch(`${this.baseUrl}user/lucas`);
+      const response = await fetch(`${this.baseUrl}users/current`, {
+        headers: this.createHeaders(),
+      });
       if (response.ok) {
         const data = await response.json();
         return data;
@@ -28,7 +36,9 @@ class ApiService {
 
   async getAllGroups() {
     const url = `${this.baseUrl}group`;
-    const response = await fetch(url);
+    const response = await fetch(url, {
+      headers: this.createHeaders(),
+    });
 
     if (!response.ok) {
       throw new Error('Network response was not ok');
@@ -36,11 +46,13 @@ class ApiService {
 
     return response.json();
   }
-  //
+
   async getAllPostsInAGroup(groupId: number) {
     try {
-      const url = `${this.baseUrl}post/group/${groupId}`;
-      const response = await fetch(url);
+      const url = `${this.baseUrl}posts/group/${groupId}`;
+      const response = await fetch(url, {
+        headers: this.createHeaders(),
+      });
       if (response.ok) {
         const data = await response.json();
         return data;
@@ -52,16 +64,35 @@ class ApiService {
     }
   }
 
-  async addReplyToPost(postId: number, content: string) {
+  async getAllPosts() {
     try {
-      const url = `${this.baseUrl}post/${postId}/replies`;
+      const url = `${this.baseUrl}posts/list`;
       const response = await fetch(url, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ content }),
+        headers: this.createHeaders(),
       });
+      if (response.ok) {
+        const data = await response.json();
+        return data;
+      } else {
+        throw new Error('Failed to fetch posts');
+      }
+    } catch (error) {
+      throw new Error(`Error fetching posts: ${error}`);
+    }
+  }
+
+
+  async addReplyToPost(postId: number, content: string) {
+    const url = `${this.baseUrl}posts/${postId}/replies`;
+
+    const options = {
+      method: 'POST',
+      headers: this.createHeaders(),
+      body: JSON.stringify({ content: content }),
+    };
+
+    try {
+      const response = await fetch(url, options);
       if (response.ok) {
         const data = await response.json();
         return data;
@@ -75,8 +106,10 @@ class ApiService {
 
   async getAllRepliesToPost(postId: number) {
     try {
-      const url = `${this.baseUrl}post/${postId}/replies`;
-      const response = await fetch(url);
+      const url = `${this.baseUrl}posts/${postId}/replies`;
+      const response = await fetch(url, {
+        headers: this.createHeaders(),
+      });
       if (response.ok) {
         const data = await response.json();
         return data;
@@ -88,14 +121,12 @@ class ApiService {
     }
   }
 
-  async updatePostWithReply(postId: number, newReply: string) { // Provide type annotations
+  async updatePostWithReply(postId: number, newReply: string) {
     try {
       const url = `${this.baseUrl}posts/${postId}`;
       const response = await fetch(url, {
         method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: this.createHeaders(),
         body: JSON.stringify({ newReply }),
       });
 
@@ -110,10 +141,11 @@ class ApiService {
     }
   }
 
-  // Define a function to fetch a single user by ID
   async getUserById(id: string) {
-    const url = `${this.baseUrl}/user/${id}`;
-    const response = await fetch(url);
+    const url = `${this.baseUrl}/users/${id}`;
+    const response = await fetch(url, {
+      headers: this.createHeaders(),
+    });
 
     if (!response.ok) {
       throw new Error('Network response was not ok');
@@ -122,11 +154,11 @@ class ApiService {
     return response.json();
   }
 
-  //
-  // Define a function to fetch all users
   async getAllUsers() {
-    const url = `${this.baseUrl}/user/list`;
-    const response = await fetch(url);
+    const url = `${this.baseUrl}/users/list`;
+    const response = await fetch(url, {
+      headers: this.createHeaders(),
+    });
 
     if (!response.ok) {
       throw new Error('Network response was not ok');
@@ -136,7 +168,9 @@ class ApiService {
   }
 
   async getGroupUsers(groupId: number) {
-    const response = await fetch(`${this.baseUrl}group/${groupId}/user/list`);
+    const response = await fetch(`${this.baseUrl}group/${groupId}/user/list`, {
+      headers: this.createHeaders(),
+    });
     if (!response.ok) {
       throw new Error(`Failed to fetch group users: ${response.status} ${response.statusText}`);
     }
@@ -144,14 +178,11 @@ class ApiService {
     return data;
   }
 
-  // Define a function to add a new user
   async addUser(id: string, name: string) {
-    const url = `${this.baseUrl}/user`;
+    const url = `${this.baseUrl}/users`;
     const response = await fetch(url, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers: this.createHeaders(),
       body: JSON.stringify({ id, name }),
     });
 
@@ -166,9 +197,7 @@ class ApiService {
     const url = `${this.baseUrl}/group`;
     const response = await fetch(url, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers: this.createHeaders(),
       body: JSON.stringify(groupData),
     });
   
@@ -178,16 +207,35 @@ class ApiService {
   
     return response.json();
   }
-  
 
-  // Define a function to update an existing user
+  async createPost(postData: PostData) {
+    const url = `${this.baseUrl}posts`;
+  
+    const options = {
+      method: 'POST',
+      headers: this.createHeaders(),
+      body: JSON.stringify(postData),
+    };
+  
+    try {
+      const response = await fetch(url, options);
+      if (response.ok) {
+        const data = await response.json();
+        return data;
+      } else {
+        throw new Error('Failed to create a post');
+      }
+    } catch (error) {
+      throw new Error(`Error creating a post: ${error}`);
+    }
+  }
+
+
   async updateUser(id: string, data: any) {
-    const url = `${this.baseUrl}user/lucas`;
+    const url = `${this.baseUrl}users/${KeycloakService.getUserId()}`;
     const response = await fetch(url, {
       method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers: this.createHeaders(),
       body: JSON.stringify(data),
     });
 

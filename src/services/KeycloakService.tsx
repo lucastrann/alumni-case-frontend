@@ -59,6 +59,7 @@ const updateToken = (successCallback: () => void): void => {
 const getUsername = (): string | undefined => _keycloak.tokenParsed?.preferred_username;
 
 const getName = (): string | undefined => _keycloak.tokenParsed?.name;
+const getUserId = () => _keycloak.tokenParsed?.sub;
 
 /**
  * Check if the user has any of the given roles
@@ -69,6 +70,7 @@ const hasRole = (roles: string[]): boolean => roles.some((role) => _keycloak.has
 
 
 const KeycloakService = {
+  getUserId,
   getName,
   initKeycloak,
   doLogin,

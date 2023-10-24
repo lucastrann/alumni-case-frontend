@@ -9,7 +9,6 @@ import {
   ModalCloseButton,
   Button,
   Input,
-  Checkbox,
 } from '@chakra-ui/react';
 
 import ApiService from '../../services/ApiService';
@@ -22,33 +21,27 @@ interface ModalComponentProps {
   placeholder: string;
 }
 
-const ModalCreateGroup: React.FC<ModalComponentProps> = ({ isOpen, onClose, title, placeholder }) => {
+const ModalCreatePost: React.FC<ModalComponentProps> = ({ isOpen, onClose, title, placeholder}) => {
   const [formData, setFormData] = useState({
-    name: '',
-    description: '',
-    color: '',
-    private: true,
+    title: '',
+    content: '',
   });
 
   const handleConfirm = async () => {
     try {
-      // Make the API call to create a group with formData
       const apiService = new ApiService('https://alumni-web.azurewebsites.net/api/v1/', `${KeycloakService.getToken()}`);
-      await apiService.createGroup(formData);
+      await apiService.createPost(formData);
       console.log(formData);
-
       // Reset the formData
       setFormData({
-        name: '',
-        description: '',
-        color: '',
-        private: true,
+        title: '',
+        content: '',
       });
 
       onClose();
     } catch (error) {
       // Handle error
-      console.error('Failed to create a group:', error);
+      console.error('Failed to create a post:', error);
     }
   };
 
@@ -60,29 +53,17 @@ const ModalCreateGroup: React.FC<ModalComponentProps> = ({ isOpen, onClose, titl
         <ModalCloseButton />
         <ModalBody>
           <Input
-            name="name"
-            placeholder="Name"
-            value={formData.name}
-            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+            name="title"
+            placeholder="Title"
+            value={formData.title}
+            onChange={(e) => setFormData({ ...formData, title: e.target.value })}
           />
           <Input
-            name="description"
-            placeholder="Description"
-            value={formData.description}
-            onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+            name="content"
+            placeholder={placeholder}
+            value={formData.content}
+            onChange={(e) => setFormData({ ...formData, content: e.target.value })}
           />
-          <Input
-            name="color"
-            placeholder="Color"
-            value={formData.color}
-            onChange={(e) => setFormData({ ...formData, color: e.target.value })}
-          />
-          <Checkbox
-            isChecked={formData.private}
-            onChange={(e) => setFormData({ ...formData, private: e.target.checked })}
-          >
-            Private
-          </Checkbox>
         </ModalBody>
         <ModalFooter>
           <Button colorScheme="blue" onClick={handleConfirm}>
@@ -94,4 +75,4 @@ const ModalCreateGroup: React.FC<ModalComponentProps> = ({ isOpen, onClose, titl
   );
 };
 
-export default ModalCreateGroup;
+export default ModalCreatePost;
