@@ -9,7 +9,10 @@ const CreateGroup: React.FC = () => {
   return (
     <Center>
       <Box maxW="800px" p="4">
-        <Button bg={colorMode === 'light' ? 'light.buttonBg' : 'dark.buttonBg'} onClick={onOpen}>
+        <Button
+          borderRadius={20}
+          bg={colorMode === 'light' ? 'light.buttonBg' : 'dark.buttonBg'}
+          onClick={onOpen}>
           Create New Group
         </Button>
         <ModalCreateGroup isOpen={isOpen} onClose={onClose} title="Create New Group" placeholder="Group Name" />

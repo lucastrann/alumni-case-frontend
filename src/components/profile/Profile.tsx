@@ -139,6 +139,7 @@ const Profile = () => {
                       </Box>
                       <div>
                         <Button
+                          borderRadius={20}
                           bg={colorMode === 'light' ? 'light.buttonBg' : 'dark.buttonBg'}
                           mr={4}
                           mb={5}
@@ -173,6 +174,7 @@ const Profile = () => {
               </Flex>
           )}
           <Button
+            borderRadius={20}
             mb={5}
             bg={colorMode === 'light' ? 'light.buttonBg' : 'dark.buttonBg'}
             onClick={handleEditClick}

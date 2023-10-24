@@ -148,7 +148,7 @@ const Feed: React.FC = () => {
               />
               <Button onClick={() => postReply(post.id)}
                 borderWidth="1px"
-                borderRadius={13}
+                borderRadius={20}
                 bg={colorMode === 'light' ? 'light.buttonBg' : 'dark.buttonBg'}
                 variant="solid">
                 Reply
