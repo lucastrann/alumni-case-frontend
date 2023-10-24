@@ -34,6 +34,27 @@ class ApiService {
     }
   }
 
+  async addNewUser() {
+    const url = `${this.baseUrl}users`;
+    const options = {
+      method: 'POST',
+      headers: this.createHeaders(
+      )
+    };
+
+    try {
+      const response = await fetch(url, options);
+      if (response.ok) {
+        const data = await response.json();
+        return data;
+      } else {
+        throw new Error('Failed to post a new user');
+      }
+    } catch (error) {
+      throw new Error(`Error posting a new user: ${error}`);
+    }
+  }
+
   async getAllGroups() {
     const url = `${this.baseUrl}group`;
     const response = await fetch(url, {

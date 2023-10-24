@@ -4,13 +4,19 @@ import KeycloakService from '../../services/KeycloakService';
 import './Login.css';
 import { Box, Text } from '@chakra-ui/react';
 import '../../components/css/Pages.css'
+import ApiService from '../../services/ApiService';
 
 const Login = () => {
   const navigate = useNavigate();
 
+  const apiService = new ApiService('https://alumni-web.azurewebsites.net/api/v1/', `${KeycloakService.getToken()}`);
+
   useEffect(() => {
-    // Check if the user is already authenticated and redirect to home
     if (KeycloakService.isLoggedIn()) {
+      console.log("adding user");
+      apiService.addNewUser();
+      console.log(apiService.addNewUser())
+      console.log("added user");
       navigate('/');
     }
   }, [navigate]);
