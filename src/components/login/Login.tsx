@@ -21,12 +21,15 @@ const Login = () => {
 
   return (
     <Box className="container">
-      <Text className="title">Welcome to our app</Text>
-      <button className="login-keycloak-btn" onClick={handleLoginClick}>
-        LOGIN
-      </button>
+      <div className="background-image">
+        <Text className="title">Welcome to Alumni</Text>
+        <Text className="subtitle">Connect with fellow alumni</Text>
+        <button className="login-keycloak-btn" onClick={handleLoginClick}>
+          LOGIN
+        </button>
+      </div>
     </Box>
-  );
+  );  
 };
 
 export default Login;
