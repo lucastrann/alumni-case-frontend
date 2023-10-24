@@ -12,11 +12,13 @@ import {
 } from '@chakra-ui/react';
 import { MoonIcon, SunIcon } from '@chakra-ui/icons';
 import KeycloakService from '../../services/KeycloakService';
+import theme from '../chakraUI/chakra-theme';
 
 const Navbar: React.FC = () => {
   const { colorMode, toggleColorMode } = useColorMode();
 
   return (
+
     <Box
       as="nav"
       bg={colorMode === 'dark' ? 'gray.800' : 'gray.150'}

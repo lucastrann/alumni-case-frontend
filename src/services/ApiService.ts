@@ -19,7 +19,7 @@ class ApiService {
 
   async fetchUserData() {
     try {
-      const response = await fetch(`${this.baseUrl}users`, {
+      const response = await fetch(`${this.baseUrl}users/current`, {
         headers: this.createHeaders(),
       });
       if (response.ok) {
@@ -81,13 +81,16 @@ class ApiService {
   }
 
   async addReplyToPost(postId: number, content: string) {
+    const url = `${this.baseUrl}posts/${postId}/replies`;
+
+    const options = {
+      method: 'POST',
+      headers: this.createHeaders(),
+      body: JSON.stringify({ content: content }),
+    };
+
     try {
-      const url = `${this.baseUrl}post/${postId}/replies`;
-      const response = await fetch(url, {
-        method: 'POST',
-        headers: this.createHeaders(),
-        body: JSON.stringify({ content }),
-      });
+      const response = await fetch(url, options);
       if (response.ok) {
         const data = await response.json();
         return data;
@@ -101,7 +104,7 @@ class ApiService {
 
   async getAllRepliesToPost(postId: number) {
     try {
-      const url = `${this.baseUrl}post/${postId}/replies`;
+      const url = `${this.baseUrl}posts/${postId}/replies`;
       const response = await fetch(url, {
         headers: this.createHeaders(),
       });
@@ -163,7 +166,7 @@ class ApiService {
   }
 
   async getGroupUsers(groupId: number) {
-    const response = await fetch(`${this.baseUrl}group/${groupId}/users/list`, {
+    const response = await fetch(`${this.baseUrl}group/${groupId}/user/list`, {
       headers: this.createHeaders(),
     });
     if (!response.ok) {
