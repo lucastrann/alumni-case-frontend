@@ -14,7 +14,9 @@ import ApiService from "../../services/ApiService";
 import KeycloakService from "../../services/KeycloakService";
 
 const Groups = () => {
-  const [groups, setGroups] = useState<Array<{ id: number; name: string; description: string; color: string; private: boolean; }>>([]);
+  const [groups, setGroups] = useState<Array<{
+    isLoading: any; id: number; name: string; description: string; color: string; private: boolean; 
+}>>([]);
   const [activeGroupId, setActiveGroupId] = useState<number | null>(null);
   const [groupUsers, setGroupUsers] = useState<{ id: string; name: string }[]>([]);
   const apiService = new ApiService('https://alumni-web.azurewebsites.net/api/v1/', `${KeycloakService.getToken()}`);
@@ -70,7 +72,7 @@ const Groups = () => {
                 borderRadius="lg"
                 overflow="hidden"
                 boxShadow="md"
-                width="100%"
+                width="250px"
                 maxW="xl"
                 bg={colorMode === 'light' ? 'gray.100' : 'gray.700'}
                 color={colorMode === 'light' ? 'gray.800' : 'white'}
@@ -89,9 +91,13 @@ const Groups = () => {
                 <Collapse in={userListVisible && group.id === activeGroupId}>
                   <VStack borderWidth="1px" borderRadius="lg" p={4}>
                     <Text fontSize="lg" fontWeight="bold">Users in this Group:</Text>
-                    {groupUsers.map((user) => (
+                    {group.isLoading ? (
+                    <Spinner size="md" color="blue.500" />
+                  ) : (
+                    groupUsers.map((user) => (
                       <Text key={user.id} fontSize="md">{user.name}</Text>
-                    ))}
+                    ))
+                  )}
                   </VStack>
                 </Collapse>
               </Box>
