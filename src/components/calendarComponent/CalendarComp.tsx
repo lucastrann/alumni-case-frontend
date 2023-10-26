@@ -23,6 +23,7 @@ import KeycloakService from '../../services/KeycloakService';
 import Event from '../../types/Event';
 import ModalCalendar from '../modal/ModalCalendar'; // Import your ModalCalendar component
 import ModalViewEvent from '../modal/ModalViewEvent';
+import CreateNewEvent from '../createevent/CreateNewEvent';
 
 moment.locale('en-gb');
 
@@ -82,13 +83,7 @@ const CalendarComp = () => {
 
   return (
     <Box mt={20} maxW={['95%', '800px']} p={4} mx="auto">
-      <Button
-        borderRadius={20}
-        bg={colorMode === 'light' ? 'light.buttonBg' : 'dark.buttonBg'}
-        onClick={onOpen}
-      >
-        Create New Event
-      </Button>
+      <CreateNewEvent />
       <BigCalendar
         localizer={localizer}
         events={events}
@@ -98,7 +93,6 @@ const CalendarComp = () => {
         getNow={() => new Date()}
         onSelectEvent={handleViewEvent} // Event click handler for viewing
       />
-      <ModalCalendar isOpen={isOpen} onClose={handleModalClose} title={'Create a new event'} placeholder={'Write your content here...'} />
       <ModalViewEvent
         isOpen={viewEventModalIsOpen}
         onClose={handleViewEventModalClose}
