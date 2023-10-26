@@ -3,4 +3,6 @@ interface PostData {
   content: string;
 }
 
+
+
 export default PostData;

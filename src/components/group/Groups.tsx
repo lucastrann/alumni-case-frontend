@@ -12,6 +12,7 @@ import {
 } from "@chakra-ui/react";
 import ApiService from "../../services/ApiService";
 import KeycloakService from "../../services/KeycloakService";
+import UsersGroupModal from '../modal/UsersGroupModal';
 
 const Groups = () => {
   const [groups, setGroups] = useState<Array<{
@@ -60,12 +61,12 @@ const Groups = () => {
   };
 
   return (
-    <>
+    <Box p={4} maxW="100%" position="relative">
       {loading ? (
         // Display a spinner while loading data
         <Spinner size="xl" thickness="4px" speed="0.65s" emptyColor="gray.200" color="blue.500" />
       ) : (
-          <SimpleGrid columns={2} spacing={4}>
+          <SimpleGrid columns={{ base: 1, sm: 2, md: 3 }} spacing={4}>
             {groups.map((group) => (
               <Box key={group.id}
                 borderWidth="1px"
@@ -88,23 +89,16 @@ const Groups = () => {
                   <Text color="gray.500">{group.description}</Text>
                   {group.private && <Badge colorScheme={group.color}>Color</Badge>}
                 </VStack>
-                <Collapse in={userListVisible && group.id === activeGroupId}>
-                  <VStack borderWidth="1px" borderRadius="lg" p={4}>
-                    <Text fontSize="lg" fontWeight="bold">Users in this Group:</Text>
-                    {group.isLoading ? (
-                    <Spinner size="md" color="blue.500" />
-                  ) : (
-                    groupUsers.map((user) => (
-                      <Text key={user.id} fontSize="md">{user.name}</Text>
-                    ))
-                  )}
-                  </VStack>
-                </Collapse>
+                <UsersGroupModal
+                  isOpen={userListVisible && group.id === activeGroupId}
+                  onClose={() => setUserListVisible(false)}
+                  groupUsers={groupUsers}
+                />
               </Box>
             ))}
           </SimpleGrid>
       )}
-    </>
+    </Box>
   );
 };
 

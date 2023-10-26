@@ -52,14 +52,14 @@ const CalendarComp = () => {
 
   return (
     <Box mt={20} maxW={['95%', '800px']} p={4} mx="auto">
-      <Button
-        mb={5}
-        borderRadius={20}
-        bg={colorMode === 'light' ? 'light.buttonBg' : 'dark.buttonBg'}
-        onClick={onOpen}
-      >
-        Create New Event
-      </Button>
+      <Box maxW="800px" p="4">
+        <Button
+          borderRadius={20}
+          bg={colorMode === 'light' ? 'light.buttonBg' : 'dark.buttonBg'}
+          onClick={onOpen}>
+          Create New Event
+        </Button>
+      </Box>
       <BigCalendar
         localizer={localizer}
         events={events}
