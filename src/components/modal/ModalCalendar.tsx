@@ -1,48 +1,60 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   Modal,
   ModalOverlay,
   ModalContent,
   ModalHeader,
+  ModalFooter,
   ModalBody,
   ModalCloseButton,
-  Input,
   Button,
+  Input,
+  Textarea,
+  Box,
   Flex,
-} from "@chakra-ui/react";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import '../css/Calendar.css';
+} from '@chakra-ui/react';
 
-interface ModalCalendarProps {
-  isOpen: boolean;
-  onClose: () => void;
-  onConfirm: (title: string, startDate: string, endDate: string) => void;
-  title: string;
-  placeholder: string;
-}
+import ApiService from '../../services/ApiService';
+import KeycloakService from '../../services/KeycloakService';
+import ModalComponentProps from '../../interfaces/ModalComponentProps';
+import { Navigate, useNavigate } from 'react-router-dom';
 
-const ModalCalendar: React.FC<ModalCalendarProps> = ({
+const ModalCalendar: React.FC<ModalComponentProps> = ({
   isOpen,
   onClose,
-  onConfirm,
   title,
   placeholder,
 }) => {
-  const [eventTitle, setEventTitle] = useState("");
-  const [startDate, setStartDate] = useState<Date | null>(null);
-  const [endDate, setEndDate] = useState<Date | null>(null);
+  const [formData, setFormData] = useState({
+    title: '',
+    content: '',
+    startsAt: new Date(),
+    endsAt: new Date(),
+    isEvent: true
+  });
+  const navigate = useNavigate();
 
+  const handleConfirm = async () => {
+    try {
+      const apiService = new ApiService(
+        'https://alumni-web.azurewebsites.net/api/v1/',
+        `${KeycloakService.getToken()}`
+      );
 
-  const handleConfirmClick = () => {
-    if (eventTitle && startDate && endDate) {
-      const formattedStartDate = startDate.toLocaleDateString();
-      const formattedEndDate = endDate.toLocaleDateString(); 
+      await apiService.createEvent(formData);
+      setFormData({
+        title: '',
+        content: '',
+        startsAt: new Date(),
+        endsAt: new Date(),
+        isEvent: true
+      });
 
-      onConfirm(eventTitle, formattedStartDate, formattedEndDate); 
-      setEventTitle(""); 
-      setStartDate(null);
-      setEndDate(null);
+      onClose();
+      navigate('/calendar');
+    } catch (error) {
+      // Handle error
+      console.error('Failed to create an event:', error);
     }
   };
 
@@ -54,34 +66,44 @@ const ModalCalendar: React.FC<ModalCalendarProps> = ({
         <ModalCloseButton />
         <ModalBody>
           <Input
-            placeholder="Event Title"
-            value={eventTitle}
-            onChange={(e) => setEventTitle(e.target.value)}
-            mb="2"
-            className="custom-input"
+            name="title"
+            placeholder="Title..."
+            value={formData.title}
+            onChange={(e) => setFormData({ ...formData, title: e.target.value })}
           />
-         <div className="date-picker-container">
-            <DatePicker
-              selected={startDate}
-              onChange={(date: Date | null) => setStartDate(date)}
-              dateFormat="dd/MM/yyyy"
-              placeholderText="Start Date"
-              className="custom-date-picker" // Add a custom class for date picker styling
-            />
-            <DatePicker
-              selected={endDate}
-              onChange={(date: Date | null) => setEndDate(date)}
-              dateFormat="dd/MM/yyyy"
-              placeholderText="End Date"
-              className="custom-date-picker" // Add a custom class for date picker styling
-            />
-          </div>
-          <Flex justifyContent="flex-end">
-            <Button colorScheme="teal" onClick={handleConfirmClick}>
-              Confirm
-            </Button>
+          <Textarea
+            name="content"
+            placeholder={placeholder}
+            value={formData.content}
+            onChange={(e) => setFormData({ ...formData, content: e.target.value })}
+            size="sm"
+          />
+          <Flex justify="space-between">
+            <Box>
+              <label>Start Date</label>
+              <Input
+                type="datetime-local"
+                name="startsAt"
+                value={formData.startsAt.toISOString().slice(0, 16)}
+                onChange={(e) => setFormData({ ...formData, startsAt: new Date(e.target.value) })}
+              />
+            </Box>
+            <Box>
+              <label>End Date</label>
+              <Input
+                type="datetime-local"
+                name="endsAt"
+                value={formData.endsAt.toISOString().slice(0, 16)}
+                onChange={(e) => setFormData({ ...formData, endsAt: new Date(e.target.value) })}
+              />
+            </Box>
           </Flex>
         </ModalBody>
+        <ModalFooter>
+          <Button colorScheme="blue" onClick={handleConfirm}>
+            Confirm
+          </Button>
+        </ModalFooter>
       </ModalContent>
     </Modal>
   );
