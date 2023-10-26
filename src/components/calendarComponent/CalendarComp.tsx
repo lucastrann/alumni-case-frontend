@@ -71,22 +71,31 @@ const CalendarComp = () => {
   };
 
   return (
-    <Box maxW={['95%', '800px']} p={4} mx="auto">
+    <Box maxW={['95%', '800px']} p={4} mx="auto"
+    >
       <CreateNewEvent />
-      <BigCalendar
-        localizer={localizer}
-        events={events}
-        startAccessor={(event) => event.startsAt}
-        endAccessor={(event) => event.endsAt}
-        style={{ height: 600 }}
-        getNow={() => new Date()}
-        onSelectEvent={handleViewEvent} // Event click handler for viewing
-      />
+      <Box
+        borderRadius={5}
+        bg={'white'}>
+        <Box
+          bg={colorMode === 'light' ? 'light.calendarBg' : 'dark.calendarBg'}
+        >
+          <BigCalendar
+            localizer={localizer}
+            events={events}
+            startAccessor={(event) => event.startsAt}
+            endAccessor={(event) => event.endsAt}
+            style={{ height: 600 }}
+            getNow={() => new Date()}
+            onSelectEvent={handleViewEvent}
+          />
+        </Box>
       <ModalViewEvent
         isOpen={viewEventModalIsOpen}
         onClose={handleViewEventModalClose}
         selectedEvent={selectedEvent}
       />
+      </Box>
     </Box>
   );
 };

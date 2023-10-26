@@ -21,7 +21,7 @@ const theme = extendTheme({
       navbarBg: 'linear-gradient(45deg, rgba(146, 197, 226, 0.5), rgba(147, 225, 216, 0.5))', // Softer dip-dye background
       replyBg: 'rgba(250, 250, 254, 0.66)',
       buttonBg: 'rgba(146, 197, 226, 0.5)',
-      iconBg: ''
+      calendarBg: 'rgba(146, 197, 226, 0.1)'
     },
     dark: {
       primary: '#2980b9',
@@ -30,7 +30,8 @@ const theme = extendTheme({
       quaternary: '#9b59b6',
       navbarBg: 'linear-gradient(45deg, rgba(51, 90, 103, 0.5), rgba(52, 152, 219, 0.5), rgba(197, 118, 246, 0.5))',
       replyBg: 'rgba(52, 152, 219, 0.5)',
-      buttonBg: 'rgba(120, 89, 182, 0.3)'
+      buttonBg: 'rgba(120, 89, 182, 0.3)',
+      calendarBg: 'rgba(30, 27, 77, 0.7)'
     },
   },
   components: {

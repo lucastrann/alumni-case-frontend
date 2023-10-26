@@ -8,7 +8,8 @@ const Group = () => {
 
   return (
     <>
-      <Box className='container'>
+      <Box className='container'
+        mt={5}>
         <CreateGroup />
         <Groups />
       </Box>
