@@ -15,7 +15,7 @@ const CreateGroup: React.FC = () => {
           onClick={onOpen}>
           Create New Post
         </Button>
-        <ModalCreatePost isOpen={isOpen} onClose={onClose} title="Create a post" placeholder="helo" />
+        <ModalCreatePost isOpen={isOpen} onClose={onClose} title="Create a post" placeholder="Write your post here..." />
       </Box>
     </Center>
   );

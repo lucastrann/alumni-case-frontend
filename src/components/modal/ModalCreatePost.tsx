@@ -9,23 +9,20 @@ import {
   ModalCloseButton,
   Button,
   Input,
+  Textarea
 } from '@chakra-ui/react';
 
 import ApiService from '../../services/ApiService';
 import KeycloakService from '../../services/KeycloakService';
-
-interface ModalComponentProps {
-  isOpen: boolean;
-  onClose: () => void;
-  title: string;
-  placeholder: string;
-}
+import ModalComponentProps from '../../interfaces/ModalComponentProps';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 const ModalCreatePost: React.FC<ModalComponentProps> = ({ isOpen, onClose, title, placeholder}) => {
   const [formData, setFormData] = useState({
     title: '',
     content: '',
   });
+  const navigate = useNavigate();
 
   const handleConfirm = async () => {
     try {
@@ -34,9 +31,11 @@ const ModalCreatePost: React.FC<ModalComponentProps> = ({ isOpen, onClose, title
       setFormData({
         title: '',
         content: '',
-      });
+      }
+      );
 
       onClose();
+      navigate('/')
     } catch (error) {
       // Handle error
       console.error('Failed to create a post:', error);
@@ -52,15 +51,16 @@ const ModalCreatePost: React.FC<ModalComponentProps> = ({ isOpen, onClose, title
         <ModalBody>
           <Input
             name="title"
-            placeholder="Title"
+            placeholder="Title..."
             value={formData.title}
             onChange={(e) => setFormData({ ...formData, title: e.target.value })}
           />
-          <Input
+          <Textarea 
             name="content"
             placeholder={placeholder}
             value={formData.content}
             onChange={(e) => setFormData({ ...formData, content: e.target.value })}
+            size="sm" 
           />
         </ModalBody>
         <ModalFooter>
