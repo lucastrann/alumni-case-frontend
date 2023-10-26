@@ -21,9 +21,8 @@ import 'moment/locale/en-gb';
 import ApiService from '../../services/ApiService';
 import KeycloakService from '../../services/KeycloakService';
 import Event from '../../types/Event';
-import ModalCalendar from '../modal/ModalCalendar'; // Import your ModalCalendar component
 import ModalViewEvent from '../modal/ModalViewEvent';
-import CreateNewEvent from '../createevent/CreateNewEvent';
+import CreateNewEvent from '../createevent/CreateNewEvent'
 
 moment.locale('en-gb');
 
@@ -60,16 +59,6 @@ const CalendarComp = () => {
     fetchEvents();
   }, []);
 
-  const handleEventClick = (event: Event) => {
-    setSelectedEvent(event);
-    onOpen();
-  };
-
-  const handleModalClose = () => {
-    setSelectedEvent(null);
-    onClose();
-  };
-
   const [viewEventModalIsOpen, setViewEventModalIsOpen] = useState(false);
 
   const handleViewEvent = (event: Event) => {
@@ -82,7 +71,7 @@ const CalendarComp = () => {
   };
 
   return (
-    <Box mt={20} maxW={['95%', '800px']} p={4} mx="auto">
+    <Box maxW={['95%', '800px']} p={4} mx="auto">
       <CreateNewEvent />
       <BigCalendar
         localizer={localizer}

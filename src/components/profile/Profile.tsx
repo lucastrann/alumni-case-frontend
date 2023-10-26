@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import KeycloakService from '../../services/KeycloakService';
 import ApiService from '../../services/ApiService';
-import '../css/Pages.css';
 import { Button, Box, Text, Image, Flex, Input, Spinner, useColorMode } from '@chakra-ui/react'; // Added Spinner
 
 const Profile = () => {
@@ -68,18 +67,17 @@ const Profile = () => {
 
   return (
     <Box className='container'
-      borderWidth="1px"
-      borderRadius="lg"
+      mt={20}
       overflow="hidden"
       boxShadow="md"
-      bg={colorMode === 'light' ? 'gray.100' : 'gray.700'}
       color={colorMode === 'light' ? 'gray.800' : 'white'}>
       {KeycloakService.isLoggedIn() ? (
         <>
           {loading ? (
-            <Spinner size="xl" color="teal.500" /> // Show spinner while loading
+            <Spinner size="xl" color="teal.500" />
           ) : (
               <Flex
+                mt={30}
                 flexDir={['column', 'column', 'column', 'row']} // Change direction for mobile screens
                 alignItems={['center', 'center', 'center', 'flex-start']} // Adjust alignment based on screen size
               >

@@ -60,7 +60,7 @@ const Groups = () => {
   };
 
   return (
-    <Box p={4} maxW="100%" position="relative">
+    <Box p={2} maxW={['95%', '800px']} position="relative">
       {loading ? (
         // Display a spinner while loading data
         <Spinner size="xl" thickness="4px" speed="0.65s" emptyColor="gray.200" color="blue.500" />

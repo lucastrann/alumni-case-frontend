@@ -12,6 +12,7 @@ import {
   Textarea,
   Box,
   Flex,
+  Stack,
 } from '@chakra-ui/react';
 
 import ApiService from '../../services/ApiService';
@@ -78,7 +79,10 @@ const ModalCalendar: React.FC<ModalComponentProps> = ({
             onChange={(e) => setFormData({ ...formData, content: e.target.value })}
             size="sm"
           />
-          <Flex justify="space-between">
+          <Stack
+            direction={['column']} // On phone, stack vertically; on tablet and larger, display side by side
+            spacing={4} // Adjust spacing as needed
+          >
             <Box>
               <label>Start Date</label>
               <Input
@@ -97,7 +101,7 @@ const ModalCalendar: React.FC<ModalComponentProps> = ({
                 onChange={(e) => setFormData({ ...formData, endsAt: new Date(e.target.value) })}
               />
             </Box>
-          </Flex>
+          </Stack>
         </ModalBody>
         <ModalFooter>
           <Button colorScheme="blue" onClick={handleConfirm}>
