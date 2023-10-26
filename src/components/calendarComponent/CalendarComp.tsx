@@ -51,33 +51,35 @@ const CalendarComp = () => {
   };
 
   return (
-    <Center>
-      <Box maxW="800px" p="4">
-        <Button
-          mb={5}
-          borderRadius={20}
-          bg={colorMode === 'light' ? 'light.buttonBg' : 'dark.buttonBg'}
-          onClick={onOpen}>
-          Create New Event
-        </Button>
-        <BigCalendar
-          localizer={localizer}
-          events={events}
-          startAccessor={(event) => event.start}
-          endAccessor={(event) => event.end}
-          style={{ height: 600 }}
-          getNow={() => new Date()}
-        />
-        <ModalCalendar
-          isOpen={isOpen}
-          onClose={onClose}
-          onConfirm={handleConfirm}
-          title="Create New Event"
-          placeholder="Event Title"
-        />
-      </Box>
-    </Center>
+    <Box mt={20} maxW={['95%', '800px']} p={4} mx="auto">
+      <Button
+        mb={5}
+        borderRadius={20}
+        bg={colorMode === 'light' ? 'light.buttonBg' : 'dark.buttonBg'}
+        onClick={onOpen}
+      >
+        Create New Event
+      </Button>
+      <BigCalendar
+        localizer={localizer}
+        events={events}
+        startAccessor={(event) => event.start}
+        endAccessor={(event) => event.end}
+        style={{ height: 600 }}
+        getNow={() => new Date()}
+      />
+      <ModalCalendar
+        isOpen={isOpen}
+        onClose={onClose}
+        onConfirm={handleConfirm}
+        title="Create New Event"
+        placeholder="Event Title"
+      />
+    </Box>
   );
 };
 
 export default CalendarComp;
+
+
+

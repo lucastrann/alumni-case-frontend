@@ -21,6 +21,7 @@ const theme = extendTheme({
       navbarBg: 'linear-gradient(45deg, rgba(146, 197, 226, 0.5), rgba(147, 225, 216, 0.5))', // Softer dip-dye background
       replyBg: 'rgba(250, 250, 254, 0.66)',
       buttonBg: 'rgba(146, 197, 226, 0.5)',
+      iconBg: ''
     },
     dark: {
       primary: '#2980b9',
