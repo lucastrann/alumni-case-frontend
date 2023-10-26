@@ -42,9 +42,13 @@ git clone [https://github.com/lucastrann/alumni-case-frontend]
 
 In the project directory, you can run:
 
-### `npm start`
+### `npm i`
 
 to install all dependencies.
+
+## 3. Start server:
+
+### run `npm start` to start a server locally
 
 ## API
 
