@@ -1,8 +1,8 @@
 import React from 'react';
 import { Button, Box, Center, useDisclosure, useColorMode } from '@chakra-ui/react';
-import ModalCreatePost from '../modal/ModalCreatePost';
+import ModalCalendar from '../modal/ModalCalendar';
 
-const CreateNewPost: React.FC = () => {
+const CreateNewEvent: React.FC = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { colorMode, setColorMode } = useColorMode();
 
@@ -13,12 +13,12 @@ const CreateNewPost: React.FC = () => {
           borderRadius={20}
           bg={colorMode === 'light' ? 'light.buttonBg' : 'dark.buttonBg'}
           onClick={onOpen}>
-          Create New Post
+          Create New Event
         </Button>
-        <ModalCreatePost isOpen={isOpen} onClose={onClose} title="Create a post" placeholder="Write your post here..." />
+        <ModalCalendar isOpen={isOpen} onClose={onClose} title="Create an event" placeholder="Write your content here..." />
       </Box>
     </Center>
   );
 };
 
-export default CreateNewPost;
+export default CreateNewEvent;

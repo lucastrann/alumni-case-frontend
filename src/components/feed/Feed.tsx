@@ -10,13 +10,15 @@ import {
   Button,
   Spinner,
   useColorMode,
-  Icon, // Added Icon component for icons
+  Icon,
+  Flex, // Added Icon component for icons
 } from '@chakra-ui/react';
 import { MdEvent } from 'react-icons/md' // Import the event icon
 import ApiService from '../../services/ApiService';
 import Post from '../../types/Post';
 import KeycloakService from '../../services/KeycloakService';
 import CreateNewPost from '../createPost/CreateNewPost';
+import CreateNewEvent from '../createevent/CreateNewEvent';
 
 const Feed: React.FC = () => {
   const [posts, setPosts] = useState<Array<Post>>([]);
@@ -85,7 +87,10 @@ const Feed: React.FC = () => {
 
   return (
     <VStack spacing={4}>
-      <CreateNewPost />
+      <Flex>
+        <CreateNewPost />
+        <CreateNewEvent />
+      </Flex>
       {loading ? (
         <Spinner size="xl" color="teal.500" />
       ) : (
