@@ -1,3 +1,4 @@
+import EventData from "../interfaces/EventData";
 import GroupData from "../interfaces/GroupData";
 import PostData from "../interfaces/PostData";
 import KeycloakService from "./KeycloakService";
@@ -31,6 +32,23 @@ class ApiService {
       }
     } catch (error) {
       throw new Error(`Error fetching user data: ${error}`);
+    }
+  }
+
+  async fetchEvents() {
+    try {
+      const url = `${this.baseUrl}posts/events`;
+      const response = await fetch(url, {
+        headers: this.createHeaders(),
+      });
+      if (response.ok) {
+        const data = await response.json();
+        return data;
+      } else {
+        throw new Error('Failed to fetch posts');
+      }
+    } catch (error) {
+      throw new Error(`Error fetching posts: ${error}`);
     }
   }
 
@@ -236,6 +254,28 @@ class ApiService {
       body: JSON.stringify(postData),
     };
   
+    try {
+      const response = await fetch(url, options);
+      if (response.ok) {
+        const data = await response.json();
+        return data;
+      } else {
+        throw new Error('Failed to create a post');
+      }
+    } catch (error) {
+      throw new Error(`Error creating a post: ${error}`);
+    }
+  }
+
+  async createEvent(eventData: EventData) {
+    const url = `${this.baseUrl}posts/event`;
+
+    const options = {
+      method: 'POST',
+      headers: this.createHeaders(),
+      body: JSON.stringify(eventData),
+    };
+
     try {
       const response = await fetch(url, options);
       if (response.ok) {

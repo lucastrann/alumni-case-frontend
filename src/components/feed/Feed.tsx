@@ -8,9 +8,11 @@ import {
   HStack,
   Input,
   Button,
-  Spinner, // Added Spinner component for loading
+  Spinner,
   useColorMode,
+  Icon, // Added Icon component for icons
 } from '@chakra-ui/react';
+import { MdEvent } from 'react-icons/md' // Import the event icon
 import ApiService from '../../services/ApiService';
 import Post from '../../types/Post';
 import KeycloakService from '../../services/KeycloakService';
@@ -20,7 +22,7 @@ const Feed: React.FC = () => {
   const [posts, setPosts] = useState<Array<Post>>([]);
   const [replyContents, setReplyContents] = useState<{ [postId: number]: string }>({});
   const { colorMode, toggleColorMode } = useColorMode();
-  const [loading, setLoading] = useState(true); // Added loading state
+  const [loading, setLoading] = useState(true);
   const apiService = new ApiService('https://alumni-web.azurewebsites.net/api/v1/', `${KeycloakService.getToken()}`);
 
   useEffect(() => {
@@ -28,7 +30,8 @@ const Feed: React.FC = () => {
       try {
         const fetchedPosts: Post[] = await apiService.getAllPosts();
 
-        // Fetch replies for each post
+        console.log(fetchedPosts);
+
         const postsWithReplies = await Promise.all(
           fetchedPosts.map(async (post) => {
             const replies = await apiService.getAllRepliesToPost(post.id);
@@ -37,10 +40,10 @@ const Feed: React.FC = () => {
         );
 
         setPosts(postsWithReplies);
-        setLoading(false); // Loading is done
+        setLoading(false);
       } catch (error) {
         console.error(error);
-        setLoading(false); // Loading finished with an error
+        setLoading(false);
       }
     };
 
@@ -57,10 +60,8 @@ const Feed: React.FC = () => {
       if (content !== undefined) {
         const response = await apiService.addReplyToPost(postId, content);
 
-        // Load the updated replies for the current post
         const replies = await apiService.getAllRepliesToPost(postId);
 
-        // Update the state to reflect the new replies
         const updatedPosts = posts.map((post) => {
           if (post.id === postId) {
             return {
@@ -73,7 +74,6 @@ const Feed: React.FC = () => {
 
         setPosts(updatedPosts);
 
-        // Clear the reply input field for the selected post
         setReplyContents({ ...replyContents, [postId]: '' });
       } else {
         console.error('content is undefined');
@@ -107,10 +107,22 @@ const Feed: React.FC = () => {
               <Text fontWeight="bold" fontSize="lg">
                 {post.senderId.name}
               </Text>
+              {post.isEvent && (
+                <Icon as={MdEvent} color="teal.500" fontSize="1.5em" title="Event" />
+              )}
             </HStack>
             <Text fontSize="xl" fontWeight="semibold" pb={2}>
               {post.title}
             </Text>
+            {post.isEvent && (
+              <Text
+                fontWeight="bold"
+                fontSize="large"
+                textColor={colorMode === 'light' ? 'light.tertiary' : 'dark.tertiary'}
+              >
+                {new Date(post.startsAt).toLocaleString()} -  {new Date(post.endsAt).toLocaleString()}
+              </Text>
+            )}
             <Text pb={4}>{post.content}</Text>
             <Box>
               {post.replies.map((reply, index) => (
@@ -126,7 +138,7 @@ const Feed: React.FC = () => {
                   color={colorMode === 'light' ? 'light.text' : 'dark.text'}
                   p={3}
                   my={1}
-                  position="relative" // Added relative positioning
+                  position="relative"
                 >
                   <HStack pb={0}>
                     <Text fontWeight="bold" fontSize="md">
@@ -146,11 +158,13 @@ const Feed: React.FC = () => {
                 onChange={(e) => handleReplyContentChange(post.id, e.target.value)}
                 placeholder="Write a reply..."
               />
-              <Button onClick={() => postReply(post.id)}
+              <Button
+                onClick={() => postReply(post.id)}
                 borderWidth="1px"
                 borderRadius={20}
                 bg={colorMode === 'light' ? 'light.buttonBg' : 'dark.buttonBg'}
-                variant="solid">
+                variant="solid"
+              >
                 Reply
               </Button>
             </HStack>

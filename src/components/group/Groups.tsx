@@ -26,7 +26,6 @@ const Groups = () => {
   const [loading, setLoading] = useState(true); 
 
   useEffect(() => {
-    // Fetch groups when the component mounts
     fetchGroups();
   }, []);
 

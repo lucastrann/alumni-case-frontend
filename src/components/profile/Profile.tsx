@@ -38,6 +38,8 @@ const Profile = () => {
     }
   };
 
+  console.log(KeycloakService.getToken())
+
   const handleCancelClick = () => {
     fetchUserData();
     setIsEditMode(false);
@@ -74,20 +76,25 @@ const Profile = () => {
       color={colorMode === 'light' ? 'gray.800' : 'white'}>
       {KeycloakService.isLoggedIn() ? (
         <>
-          <Text className='title'>Your Profile</Text>
           {loading ? (
             <Spinner size="xl" color="teal.500" /> // Show spinner while loading
           ) : (
-              <Flex alignItems="center"> {/* Center-align elements */}
+              <Flex
+                flexDir={['column', 'column', 'column', 'row']} // Change direction for mobile screens
+                alignItems={['center', 'center', 'center', 'flex-start']} // Adjust alignment based on screen size
+              >
+                {/* Show the image at the top on mobile screens */}
                 <Image
                   src={userData?.picture}
                   alt="User Profile"
-                  boxSize="200px"
+                  boxSize={['120px', '120px', '120px', '200px']} // Adjust size for mobile screens
                   objectFit="cover"
                   borderRadius="full"
                   boxShadow="lg"
+                  mb={['4', '4', '4', '0']}
+                  mt={2}// Add margin bottom for spacing on mobile screens
                 />
-                <Box ml={10}>
+                <Box ml={['0', '0', '0', '10']}>
                   <Text fontSize="2xl" fontWeight="bold">{userData?.name}</Text>
                   {isEditMode ? (
                     // Render editable fields when in edit mode
@@ -157,7 +164,6 @@ const Profile = () => {
                       </div>
                     </form>
                   ) : (
-                    // Render user data when not in edit mode
                     <>
                   <Text fontSize="xl" color="gray.500">
                     {userData?.status}
