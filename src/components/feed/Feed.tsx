@@ -32,8 +32,6 @@ const Feed: React.FC = () => {
       try {
         const fetchedPosts: Post[] = await apiService.getAllPosts();
 
-        console.log(fetchedPosts);
-
         const postsWithReplies = await Promise.all(
           fetchedPosts.map(async (post) => {
             const replies = await apiService.getAllRepliesToPost(post.id);
@@ -76,6 +74,7 @@ const Feed: React.FC = () => {
 
         setPosts(updatedPosts);
 
+        // Clear the reply input field for the selected post
         setReplyContents({ ...replyContents, [postId]: '' });
       } else {
         console.error('content is undefined');
