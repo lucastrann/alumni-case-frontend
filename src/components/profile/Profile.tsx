@@ -37,8 +37,6 @@ const Profile = () => {
     }
   };
 
-  console.log(KeycloakService.getToken())
-
   const handleCancelClick = () => {
     fetchUserData();
     setIsEditMode(false);
