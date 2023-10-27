@@ -52,7 +52,7 @@ const ModalCalendar: React.FC<ModalComponentProps> = ({
       });
 
       onClose();
-      navigate('/calendar');
+      navigate('/login');
     } catch (error) {
       // Handle error
       console.error('Failed to create an event:', error);

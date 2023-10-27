@@ -35,7 +35,7 @@ const ModalCreatePost: React.FC<ModalComponentProps> = ({ isOpen, onClose, title
       );
 
       onClose();
-      navigate('/')
+      navigate('/login')
     } catch (error) {
       // Handle error
       console.error('Failed to create a post:', error);
