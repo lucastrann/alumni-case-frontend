@@ -9,7 +9,8 @@ import {
   ModalCloseButton,
   Button,
   Input,
-  Textarea
+  Textarea,
+  useColorMode
 } from '@chakra-ui/react';
 
 import ApiService from '../../services/ApiService';
@@ -23,6 +24,7 @@ const ModalCreatePost: React.FC<ModalComponentProps> = ({ isOpen, onClose, title
     content: '',
   });
   const navigate = useNavigate();
+  const { colorMode, setColorMode } = useColorMode();
 
   const handleConfirm = async () => {
     try {
@@ -45,17 +47,27 @@ const ModalCreatePost: React.FC<ModalComponentProps> = ({ isOpen, onClose, title
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
-      <ModalContent>
+      <ModalContent
+        bg={colorMode === 'light'
+          ? 'gray.200'
+          : 'gray.700'}
+      >
         <ModalHeader>{title}</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
           <Input
+            borderColor={colorMode === 'light' ? 'gray.600' : 'gray.600'}
+            bg={colorMode === 'light' ? 'whiteAlpha.600' : 'gray.800'}
+            padding={2}
+            mb={4}
             name="title"
             placeholder="Title..."
             value={formData.title}
             onChange={(e) => setFormData({ ...formData, title: e.target.value })}
           />
           <Textarea 
+            borderColor={colorMode === 'light' ? 'gray.600' : 'gray.600'}
+            bg={colorMode === 'light' ? 'whiteAlpha.600' : 'gray.800'}
             name="content"
             placeholder={placeholder}
             value={formData.content}

@@ -13,6 +13,7 @@ import {
   Box,
   Flex,
   Stack,
+  useColorMode,
 } from '@chakra-ui/react';
 
 import ApiService from '../../services/ApiService';
@@ -33,6 +34,7 @@ const ModalCalendar: React.FC<ModalComponentProps> = ({
     endsAt: new Date(),
     isEvent: true
   });
+  const { colorMode, toggleColorMode } = useColorMode();
   const navigate = useNavigate();
 
   const handleConfirm = async () => {
@@ -62,17 +64,29 @@ const ModalCalendar: React.FC<ModalComponentProps> = ({
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
-      <ModalContent>
+      <ModalContent
+        bg={colorMode === 'light'
+          ? 'gray.200'
+          : 'gray.700'}>
         <ModalHeader>{title}</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
           <Input
+            borderWidth="1px"
+            borderRadius="5px"
+            borderColor={colorMode === 'light' ? 'gray.600' : 'gray.600'}
+            bg={colorMode === 'light' ? 'whiteAlpha.600' : 'gray.800'}
+            mb={4}
             name="title"
             placeholder="Title..."
             value={formData.title}
             onChange={(e) => setFormData({ ...formData, title: e.target.value })}
           />
           <Textarea
+            borderWidth="1px"
+            borderRadius="5px"
+            borderColor={colorMode === 'light' ? 'gray.600' : 'gray.600'}
+            bg={colorMode === 'light' ? 'whiteAlpha.600' : 'gray.800'}
             name="content"
             placeholder={placeholder}
             value={formData.content}
@@ -86,6 +100,10 @@ const ModalCalendar: React.FC<ModalComponentProps> = ({
             <Box>
               <label>Start Date</label>
               <Input
+                borderWidth="1px"
+                borderRadius="5px"
+                borderColor={colorMode === 'light' ? 'gray.600' : 'gray.600'}
+                bg={colorMode === 'light' ? 'whiteAlpha.600' : 'gray.800'}
                 type="datetime-local"
                 name="startsAt"
                 value={formData.startsAt.toISOString().slice(0, 16)}
@@ -95,6 +113,10 @@ const ModalCalendar: React.FC<ModalComponentProps> = ({
             <Box>
               <label>End Date</label>
               <Input
+                borderWidth="1px"
+                borderRadius="5px"
+                borderColor={colorMode === 'light' ? 'gray.600' : 'gray.600'}
+                bg={colorMode === 'light' ? 'whiteAlpha.600' : 'gray.800'}
                 type="datetime-local"
                 name="endsAt"
                 value={formData.endsAt.toISOString().slice(0, 16)}

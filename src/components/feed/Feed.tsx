@@ -11,7 +11,7 @@ import {
   Spinner,
   useColorMode,
   Icon,
-  Flex, // Added Icon component for icons
+  Flex,
 } from '@chakra-ui/react';
 import { MdEvent } from 'react-icons/md' // Import the event icon
 import ApiService from '../../services/ApiService';
@@ -102,17 +102,26 @@ const Feed: React.FC = () => {
             boxShadow="md"
             width="100%"
             maxW="xl"
-            bg={colorMode === 'light' ? 'gray.100' : 'gray.700'}
+            bg={
+              post.isEvent
+                ? colorMode === 'light'
+                  ? 'green.200'
+                  : 'green.700'
+                : colorMode === 'light'
+                  ? 'gray.200'
+                  : 'gray.700'
+            }
             color={colorMode === 'light' ? 'gray.800' : 'white'}
             p={6}
           >
+
             <HStack spacing={3} pb={2}>
               <Avatar src={post.senderId.picture} name={post.senderId.name} />
               <Text fontWeight="bold" fontSize="lg">
                 {post.senderId.name}
               </Text>
               {post.isEvent && (
-                <Icon as={MdEvent} color="teal.500" fontSize="1.5em" title="Event" />
+                <Icon as={MdEvent} color={colorMode === 'light' ? 'gray.800' : 'whiteAlpha.700'} fontSize="1.5em" title="Event" />
               )}
             </HStack>
             <Text fontSize="xl" fontWeight="semibold" pb={2}>

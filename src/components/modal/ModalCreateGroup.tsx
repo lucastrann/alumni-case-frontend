@@ -10,6 +10,7 @@ import {
   Button,
   Input,
   Checkbox,
+  useColorMode,
 } from '@chakra-ui/react';
 
 import ApiService from '../../services/ApiService';
@@ -29,6 +30,7 @@ const ModalCreateGroup: React.FC<ModalComponentProps> = ({ isOpen, onClose, titl
     color: '',
     private: true,
   });
+  const { colorMode, setColorMode } = useColorMode();
 
   const handleConfirm = async () => {
     try {
@@ -54,29 +56,48 @@ const ModalCreateGroup: React.FC<ModalComponentProps> = ({ isOpen, onClose, titl
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
-      <ModalContent>
+      <ModalContent
+        bg={colorMode === 'light'
+          ? 'gray.200'
+          : 'gray.700'}
+      >
+
         <ModalHeader>{title}</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
           <Input
+            borderColor={colorMode === 'light' ? 'gray.600' : 'gray.600'}
+            bg={colorMode === 'light' ? 'whiteAlpha.600' : 'gray.800'}
+            padding={2}
+            mb={4}
             name="name"
             placeholder="Name"
             value={formData.name}
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
           />
           <Input
+            borderColor={colorMode === 'light' ? 'gray.600' : 'gray.600'}
+            bg={colorMode === 'light' ? 'whiteAlpha.600' : 'gray.800'}
+            padding={2}
+            mb={4}
             name="description"
             placeholder="Description"
             value={formData.description}
             onChange={(e) => setFormData({ ...formData, description: e.target.value })}
           />
           <Input
+            borderColor={colorMode === 'light' ? 'gray.600' : 'gray.600'}
+            bg={colorMode === 'light' ? 'whiteAlpha.600' : 'gray.800'}
+            padding={2}
+            mb={4}
             name="color"
             placeholder="Color"
             value={formData.color}
             onChange={(e) => setFormData({ ...formData, color: e.target.value })}
           />
           <Checkbox
+            borderColor={colorMode === 'light' ? 'gray.600' : 'gray.600'}
+            bg={colorMode === 'light' ? 'whiteAlpha.600' : 'gray.800'}
             isChecked={formData.private}
             onChange={(e) => setFormData({ ...formData, private: e.target.checked })}
           >
