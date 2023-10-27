@@ -19,6 +19,7 @@ import Post from '../../types/Post';
 import KeycloakService from '../../services/KeycloakService';
 import CreateNewPost from '../createPost/CreateNewPost';
 import CreateNewEvent from '../createevent/CreateNewEvent';
+import { useNavigate } from 'react-router-dom';
 
 const Feed: React.FC = () => {
   const [posts, setPosts] = useState<Array<Post>>([]);
@@ -26,6 +27,7 @@ const Feed: React.FC = () => {
   const { colorMode, toggleColorMode } = useColorMode();
   const [loading, setLoading] = useState(true);
   const apiService = new ApiService('https://alumni-web.azurewebsites.net/api/v1/', `${KeycloakService.getToken()}`);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -53,6 +55,10 @@ const Feed: React.FC = () => {
   const handleReplyContentChange = (postId: number, content: string) => {
     setReplyContents({ ...replyContents, [postId]: content });
   };
+
+  const navigateCalendar = () => {
+    navigate('/calendar')
+  }
 
   const postReply = async (postId: number) => {
     try {
@@ -121,7 +127,7 @@ const Feed: React.FC = () => {
                 {post.senderId.name}
               </Text>
               {post.isEvent && (
-                <Icon as={MdEvent} color={colorMode === 'light' ? 'gray.800' : 'whiteAlpha.700'} fontSize="1.5em" title="Event" />
+                <Icon as={MdEvent} color={colorMode === 'light' ? 'gray.800' : 'whiteAlpha.700'} fontSize="1.5em" title="Event" onClick={navigateCalendar} />
               )}
             </HStack>
             <Text fontSize="xl" fontWeight="semibold" pb={2}>
@@ -131,7 +137,7 @@ const Feed: React.FC = () => {
               <Text
                 fontWeight="bold"
                 fontSize="large"
-                textColor={colorMode === 'light' ? 'light.tertiary' : 'dark.tertiary'}
+                textColor={colorMode === 'light' ? 'red.700' : 'dark.tertiary'}
               >
                 {new Date(post.startsAt).toLocaleString()} -  {new Date(post.endsAt).toLocaleString()}
               </Text>
