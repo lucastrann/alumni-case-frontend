@@ -46,13 +46,15 @@ In the project directory, you can run:
 
 to install all dependencies.
 
-## 3. Start server:
+### 3. Start server:
 
 ### run `npm start` to start a server locally
 
 ## API
 
 The API for this project can be found [here](https://github.com/OzKara/alumni-backend)
+
+The API Documentation (with Swagger) can be found [here](https://alumni-web.azurewebsites.net/swagger-ui/index.html#/)
 
 ## Maintainers
 
